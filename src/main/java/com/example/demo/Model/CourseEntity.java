@@ -1,24 +1,13 @@
 package com.example.demo.Model;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
-@Table(name = "course", schema = "MTD_attend", catalog = "")
+@Table(name = "course", schema = "AttendMeDaddy", catalog = "")
 public class CourseEntity {
-    private Long id;
     private int courseId;
     private String courseName;
-
-    @Id
-    @GeneratedValue
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private int classId;
 
     @Id
     @Column(name = "courseID")
@@ -40,16 +29,35 @@ public class CourseEntity {
         this.courseName = courseName;
     }
 
+    @Basic
+    @Column(name = "class_id")
+    public int getClassId() {
+        return classId;
+    }
+
+    public void setClassId(int classId) {
+        this.classId = classId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         CourseEntity that = (CourseEntity) o;
-        return courseId == that.courseId && Objects.equals(courseName, that.courseName);
+
+        if (courseId != that.courseId) return false;
+        if (classId != that.classId) return false;
+        if (courseName != null ? !courseName.equals(that.courseName) : that.courseName != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(courseId, courseName);
+        int result = courseId;
+        result = 31 * result + (courseName != null ? courseName.hashCode() : 0);
+        result = 31 * result + classId;
+        return result;
     }
 }

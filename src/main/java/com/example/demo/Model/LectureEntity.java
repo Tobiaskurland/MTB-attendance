@@ -3,28 +3,17 @@ package com.example.demo.Model;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.Objects;
 
 @Entity
-@Table(name = "lecture", schema = "MTD_attend", catalog = "")
+@Table(name = "lecture", schema = "AttendMeDaddy", catalog = "")
 public class LectureEntity {
-    private Long id;
     private int lectureId;
     private String lectureName;
     private Date date;
     private int timeInterval;
     private String verificationCode;
     private Timestamp codeExpire;
-
-    @Id
-    @GeneratedValue
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private int courseId;
 
     @Id
     @Column(name = "lectureID")
@@ -86,16 +75,44 @@ public class LectureEntity {
         this.codeExpire = codeExpire;
     }
 
+    @Basic
+    @Column(name = "course_id")
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         LectureEntity that = (LectureEntity) o;
-        return lectureId == that.lectureId && timeInterval == that.timeInterval && Objects.equals(lectureName, that.lectureName) && Objects.equals(date, that.date) && Objects.equals(verificationCode, that.verificationCode) && Objects.equals(codeExpire, that.codeExpire);
+
+        if (lectureId != that.lectureId) return false;
+        if (timeInterval != that.timeInterval) return false;
+        if (courseId != that.courseId) return false;
+        if (lectureName != null ? !lectureName.equals(that.lectureName) : that.lectureName != null) return false;
+        if (date != null ? !date.equals(that.date) : that.date != null) return false;
+        if (verificationCode != null ? !verificationCode.equals(that.verificationCode) : that.verificationCode != null)
+            return false;
+        if (codeExpire != null ? !codeExpire.equals(that.codeExpire) : that.codeExpire != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lectureId, lectureName, date, timeInterval, verificationCode, codeExpire);
+        int result = lectureId;
+        result = 31 * result + (lectureName != null ? lectureName.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + timeInterval;
+        result = 31 * result + (verificationCode != null ? verificationCode.hashCode() : 0);
+        result = 31 * result + (codeExpire != null ? codeExpire.hashCode() : 0);
+        result = 31 * result + courseId;
+        return result;
     }
 }

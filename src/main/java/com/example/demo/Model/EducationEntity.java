@@ -1,24 +1,12 @@
 package com.example.demo.Model;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
-@Table(name = "education", schema = "MTD_attend", catalog = "")
+@Table(name = "education", schema = "AttendMeDaddy", catalog = "")
 public class EducationEntity {
-    private Long id;
     private int educationId;
     private String educationName;
-
-    @Id
-    @GeneratedValue
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Id
     @Column(name = "educationID")
@@ -44,12 +32,20 @@ public class EducationEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         EducationEntity that = (EducationEntity) o;
-        return educationId == that.educationId && Objects.equals(educationName, that.educationName);
+
+        if (educationId != that.educationId) return false;
+        if (educationName != null ? !educationName.equals(that.educationName) : that.educationName != null)
+            return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(educationId, educationName);
+        int result = educationId;
+        result = 31 * result + (educationName != null ? educationName.hashCode() : 0);
+        return result;
     }
 }
