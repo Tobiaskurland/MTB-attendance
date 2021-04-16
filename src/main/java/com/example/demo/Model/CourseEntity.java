@@ -3,7 +3,7 @@ package com.example.demo.Model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "course", schema = "AttendMeDaddy", catalog = "")
+@Table(name = "course", schema = "MTD_attend", catalog = "")
 public class CourseEntity {
     private int courseId;
     private String courseName;
@@ -20,7 +20,7 @@ public class CourseEntity {
     }
 
     @Basic
-    @Column(name = "courseName")
+    @Column(name = "course_name")
     public String getCourseName() {
         return courseName;
     }

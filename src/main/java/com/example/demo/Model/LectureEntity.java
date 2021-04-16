@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "lecture", schema = "AttendMeDaddy", catalog = "")
+@Table(name = "lecture", schema = "MTD_attend", catalog = "")
 public class LectureEntity {
     private int lectureId;
     private String lectureName;
@@ -26,7 +26,7 @@ public class LectureEntity {
     }
 
     @Basic
-    @Column(name = "lectureName")
+    @Column(name = "lecture_name")
     public String getLectureName() {
         return lectureName;
     }

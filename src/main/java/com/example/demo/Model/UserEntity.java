@@ -3,7 +3,7 @@ package com.example.demo.Model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user", schema = "AttendMeDaddy", catalog = "")
+@Table(name = "user", schema = "MTD_attend", catalog = "")
 public class UserEntity {
     private int userId;
     private String firstName;
@@ -23,7 +23,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "firstName")
+    @Column(name = "first_name")
     public String getFirstName() {
         return firstName;
     }
@@ -33,7 +33,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "lastName")
+    @Column(name = "last_name")
     public String getLastName() {
         return lastName;
     }

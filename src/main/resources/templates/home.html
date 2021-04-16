@@ -5,6 +5,10 @@
     <title>Home</title>
 </head>
 <body>
+<h1 th:if="${teacher}">Teacher</h1>
 <p>THIS IS WORKING MR. <span th:text="${user.firstName} + ' ' + ${user.lastName}"></span>!!</p>
+
+<a th:href="@{/logout}" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Logout"> Logout
+</a>
 </body>
 </html>

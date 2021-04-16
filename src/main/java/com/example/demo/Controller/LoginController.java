@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 @Controller
 public class LoginController {
 
+    //Logger
     Logger log = Logger.getLogger(LoginController.class.getName());
 
     @Autowired
@@ -22,7 +23,11 @@ public class LoginController {
     @Autowired
     SignupService signupService;
 
+    //The loggedIn user
     private UserEntity user;
+
+    //Is the user a teacher?
+    private boolean teacher;
 
 
     //LOGIN
@@ -36,8 +41,10 @@ public class LoginController {
     @PostMapping("/login")
     public String login(@RequestParam String firstName, @RequestParam String password, HttpSession session, Model model) {
 
+        //See if the user consist in the database
         UserEntity user = loginService.findLogin(firstName, password);
 
+        //If the user doesn't exist, redirect to login page
         if (user == null){
 
             String error = "Username or password was incorrect!";
@@ -48,9 +55,16 @@ public class LoginController {
 
             return "redirect:/";
 
-        } else{
+        } else{ //Else set the user to this.user
             this.user = user;
+
+            //Check if the user is a teacher - HARDCODED.....
+            if (this.user.getFirstName().equals("Mathias") && this.user.getLastName().equals("Hønberg")){
+                this.teacher = true;
+            }
+
             session.setAttribute("login", this.user);
+
             return "redirect:/home";
         }
     }
@@ -62,7 +76,10 @@ public class LoginController {
 
         log.info("logout called... ");
 
+        //Remove the session from the client
         session.removeAttribute("login");
+        //Reset the teacher boolean
+        this.teacher = false;
 
         log.info("session terminated");
 
@@ -80,6 +97,7 @@ public class LoginController {
     @PostMapping("/signup")
     public String signup(@ModelAttribute UserEntity user, HttpSession session, Model model) throws JSONException {
 
+        //Add the user to the database
         signupService.signup(user);
 
         return "redirect:/";
@@ -90,11 +108,15 @@ public class LoginController {
     @GetMapping("/home")
     public String TempHome(HttpSession session, Model model){
 
+        //If a user is loggedIn
         if (session.getAttribute("login") != null){
 
+            //Get the user from the session
             UserEntity u = (UserEntity)session.getAttribute("login");
 
+            //Data we need on the HTML
             model.addAttribute("user", u);
+            model.addAttribute("teacher", this.teacher);
 
             return "home";
         }else {
