@@ -5,20 +5,10 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "course", schema = "MTD_attend", catalog = "")
-public class CourseEntity {
-    private Long id;
+public class Course {
     private int courseId;
     private String courseName;
-
-    @Id
-    @GeneratedValue
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private int class_id;
 
     @Id
     @Column(name = "courseID")
@@ -31,7 +21,7 @@ public class CourseEntity {
     }
 
     @Basic
-    @Column(name = "courseName")
+    @Column(name = "course_name")
     public String getCourseName() {
         return courseName;
     }
@@ -40,11 +30,21 @@ public class CourseEntity {
         this.courseName = courseName;
     }
 
+    @Basic
+    @Column(name = "class_id")
+    public int getClass_id() {
+        return class_id;
+    }
+
+    public void setClass_id(int class_id) {
+        this.class_id = class_id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CourseEntity that = (CourseEntity) o;
+        Course that = (Course) o;
         return courseId == that.courseId && Objects.equals(courseName, that.courseName);
     }
 

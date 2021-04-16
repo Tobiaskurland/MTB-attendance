@@ -5,25 +5,16 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "user", schema = "MTD_attend", catalog = "")
-public class UserEntity {
-    private Long id;
+public class User {
     private int userId;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
+    private int class_id;
 
     @Id
-    @GeneratedValue
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
     @Column(name = "userID")
     public int getUserId() {
         return userId;
@@ -34,7 +25,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "firstName")
+    @Column(name = "first_name")
     public String getFirstName() {
         return firstName;
     }
@@ -44,7 +35,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "lastName")
+    @Column(name = "last_name")
     public String getLastName() {
         return lastName;
     }
@@ -73,11 +64,21 @@ public class UserEntity {
         this.password = password;
     }
 
+    @Basic
+    @Column(name = "class_id")
+    public int getClass_id() {
+        return class_id;
+    }
+
+    public void setClass_id(int education_id) {
+        this.class_id = education_id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserEntity that = (UserEntity) o;
+        User that = (User) o;
         return userId == that.userId && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(email, that.email) && Objects.equals(password, that.password);
     }
 

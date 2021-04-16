@@ -7,24 +7,15 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "lecture", schema = "MTD_attend", catalog = "")
-public class LectureEntity {
-    private Long id;
+public class Lecture {
     private int lectureId;
     private String lectureName;
     private Date date;
     private int timeInterval;
     private String verificationCode;
     private Timestamp codeExpire;
+    private int course_id;
 
-    @Id
-    @GeneratedValue
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Id
     @Column(name = "lectureID")
@@ -37,7 +28,7 @@ public class LectureEntity {
     }
 
     @Basic
-    @Column(name = "lectureName")
+    @Column(name = "lecture_name")
     public String getLectureName() {
         return lectureName;
     }
@@ -86,11 +77,21 @@ public class LectureEntity {
         this.codeExpire = codeExpire;
     }
 
+    @Column(name = "course_id")
+    @Basic
+    public int getCourse_id() {
+        return course_id;
+    }
+
+    public void setCourse_id(int course_id) {
+        this.course_id = course_id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LectureEntity that = (LectureEntity) o;
+        Lecture that = (Lecture) o;
         return lectureId == that.lectureId && timeInterval == that.timeInterval && Objects.equals(lectureName, that.lectureName) && Objects.equals(date, that.date) && Objects.equals(verificationCode, that.verificationCode) && Objects.equals(codeExpire, that.codeExpire);
     }
 
