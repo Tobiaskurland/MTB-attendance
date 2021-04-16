@@ -1,7 +1,5 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Model.Attendance;
-import com.example.demo.Model.Lecture;
 import com.example.demo.Model.User;
 import com.example.demo.Model.Views.AttendanceView;
 import com.example.demo.Service.AttendanceServiceImpl;
@@ -42,7 +40,7 @@ public class StudentStatisticController {
         User theUser = userService.findById(userId);
 
         model.addAttribute("user", theUser);
-        model.addAttribute("course", courseService.findCourseByClassId(theUser.getClass_id()));
+        model.addAttribute("course", courseService.findCourseByClassId(theUser.getClassId()));
 
         return "statistics";
     }
@@ -54,7 +52,7 @@ public class StudentStatisticController {
         List<AttendanceView> theView = attendanceViewService.findAllByUserId(userId);
 
         model.addAttribute("user", theUser);
-        model.addAttribute("course", courseService.findCourseByClassId(theUser.getClass_id()));
+        model.addAttribute("course", courseService.findCourseByClassId(theUser.getClassId()));
         model.addAttribute("attendanceOverview", attendanceViewService.findAllByUserId(userId));
 
         return "statistics";

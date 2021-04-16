@@ -11,7 +11,7 @@ public class User {
     private String lastName;
     private String email;
     private String password;
-    private int class_id;
+    private int classId;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
@@ -66,12 +66,12 @@ public class User {
 
     @Basic
     @Column(name = "class_id")
-    public int getClass_id() {
-        return class_id;
+    public int getClassId() {
+        return classId;
     }
 
-    public void setClass_id(int education_id) {
-        this.class_id = education_id;
+    public void setClassId(int education_id) {
+        this.classId = education_id;
     }
 
     @Override
