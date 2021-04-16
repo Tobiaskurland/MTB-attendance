@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Overview</title>
+</head>
+<body>
+    <div>
+        <div>Overview</div>
+        <div>
+            <div>Courses</div>
+            <div th:each="course : ${courses}">
+                <a th:text="${'/course/' + course.courseID}">
+                    <div th:text="${course.courseName}"></div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
