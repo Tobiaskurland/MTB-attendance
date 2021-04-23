@@ -2,17 +2,19 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
     <title>Overview</title>
 </head>
 <body>
     <div>
-        <div>Overview</div>
+        <div class="topbar centered" th:text="${'Hello ' + username}"></div>
         <div>
-            <div>Courses</div>
-            <div th:each="course : ${courses}">
-                <a th:text="${'/course/' + course.courseID}">
-                    <div th:text="${course.courseName}"></div>
-                </a>
+            <div class="centered title">These are your courses</div>
+            <div class="flatlist">
+                <div th:each="course : ${courses}">
+                    <a class="clickable spacing centered" th:href="${'/course/' + course.getCourseId() + '?weeknumber=' + week + '&year=' + year}" th:text="${course.getCourseName()}"></a>
+                </div>
             </div>
         </div>
 
