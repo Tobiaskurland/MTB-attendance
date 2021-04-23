@@ -15,6 +15,7 @@ public class AttendanceView {
     private String course_name;
     private String lecture_name;
     private String date;
+    private String lecture_status;
     private String first;
     private String second;
     private String third;
@@ -121,6 +122,16 @@ public class AttendanceView {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    @Basic
+    @Column(name = "lecture_status")
+    public String getLecture_status() {
+        return lecture_status;
+    }
+
+    public void setLecture_status(String lecture_status) {
+        this.lecture_status = lecture_status;
     }
 
     @Basic
