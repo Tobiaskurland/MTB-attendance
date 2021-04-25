@@ -14,7 +14,7 @@
     <div style="margin-left: 20px">
         <br><br><br><br>
 
-        <form th:action="@{'/student/statistics/' + ${user.userId} + '/result'}" method="get">
+        <form th:action="@{'/student/statistics/result'}" method="get">
             <select th:name="course" class="btn btn-secondary dropdown-toggle dropdown-option" required>
                 <option th:if="${course} != 0" value="" selected disabled hidden>Select course</option>
                 <option th:each="c: ${courses}" th:text="${c.courseName}" th:value="${c.courseId}" th:selected="(${c.courseId} == *{course})"></option>
