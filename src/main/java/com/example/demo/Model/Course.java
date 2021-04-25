@@ -8,8 +8,6 @@ import java.util.Objects;
 public class Course {
     private int courseId;
     private String courseName;
-    private int class_id;
-
     @Id
     @Column(name = "courseID")
     public int getCourseId() {
@@ -28,16 +26,6 @@ public class Course {
 
     public void setCourseName(String courseName) {
         this.courseName = courseName;
-    }
-
-    @Basic
-    @Column(name = "class_id")
-    public int getClass_id() {
-        return class_id;
-    }
-
-    public void setClass_id(int class_id) {
-        this.class_id = class_id;
     }
 
     @Override

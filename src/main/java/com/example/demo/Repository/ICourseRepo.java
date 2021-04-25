@@ -11,8 +11,16 @@ import java.util.List;
 @Repository
 public interface ICourseRepo extends JpaRepository<Course, Integer> {
 
-    @Query("select c from Course c where c.class_id = ?1")
+    @Query(value = "select c.* from course c " +
+            "JOIN course_class cc on cc.course_id = c.courseID where cc.class_id = ?1", nativeQuery = true)
     List<Course> findCourseByClassId(int classId);
+
+    @Query(value = "select c.* from user_class uc " +
+            "join class cl on cl.classID = uc.class_id " +
+            "join course_class cc on cc.class_id = cl.classID " +
+            "join course c on c.courseID = cc.course_id " +
+            "where uc.user_id = ?1 ", nativeQuery = true)
+    List<Course> findCourseByUserId(int userId);
 
 
 }

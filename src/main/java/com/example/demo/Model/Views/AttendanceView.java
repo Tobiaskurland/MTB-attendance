@@ -65,7 +65,7 @@ public class AttendanceView {
     }
 
     @Basic
-    @Column(name = "classID")
+    @Column(name = "class_id")
     public int getClassID() {
         return classID;
     }
@@ -85,7 +85,7 @@ public class AttendanceView {
     }
 
     @Basic
-    @Column(name = "courseID")
+    @Column(name = "course_id")
     public int getCourseID() {
         return courseID;
     }

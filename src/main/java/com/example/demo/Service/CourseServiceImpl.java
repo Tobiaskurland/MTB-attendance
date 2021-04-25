@@ -4,12 +4,6 @@ import com.example.demo.Model.Course;
 import com.example.demo.Repository.ICourseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.temporal.IsoFields;
-import java.time.temporal.TemporalAdjuster;
-import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 
 @Service
@@ -26,6 +20,11 @@ public class CourseServiceImpl implements ICourseService {
     @Override
     public List<Course> findCourseByClassId(int id) {
         return courseRepo.findCourseByClassId(id);
+    }
+
+    @Override
+    public List<Course> findCourseByUserId(int id) {
+        return courseRepo.findCourseByUserId(id);
     }
 
     @Override
