@@ -9,6 +9,6 @@ import java.util.List;
 public interface IAttendanceViewService {
 
     List<AttendanceView> findAll();
-    List<AttendanceView> findAllByUserId(int id);
+    List<AttendanceView> findAllByUserAndCourse(int userId, int courseId);
     AttendanceView findById(int id);
 }

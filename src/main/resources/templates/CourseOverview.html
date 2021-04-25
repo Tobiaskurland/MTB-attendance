@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <title>Course overview</title>
+</head>
+<body>
+    <div>
+        <div class="topbar centered" th:text="${course.getCourseName()}"></div>
+        <div>
+            <div class="centered title" th:text="${'Lectures for week ' + week + ' (' + startdate + ' - ' + enddate + ')'}">Lectures</div>
+            <form>
+                <label for="year">Year:</label>
+                <input class="numberinput" id="year" name="year" type="number" th:value="${year}">
+                <label for="weeknumber">Week number:</label>
+                <input class="numberinput" id="weeknumber" name="weeknumber" type="number" th:value="${week}">
+                <input class="clickable" type="submit" value="submit">
+            </form>
+            <div  class="weeklist">
+                <div class="list">
+                    <h3>Monday</h3>
+                    <div class="lecture" th:each="lecture : ${monday}">
+                        <a class="clickable spacing centered"
+                           th:if="${lecture != null}"
+                           th:href="${role == 'teacher'} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}"
+                           th:text="${lecture.getLectureName()}">
+                        </a>
+                    </div>
+                    <div class="lecture"></div>
+                </div>
+                <div class="list">
+                    <h3>Tuesday</h3>
+                    <div class="lecture" th:each="lecture : ${tuesday}">
+                        <a class="clickable spacing centered"
+                           th:if="${lecture != null}"
+                           th:href="${role == 'teacher'} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}"
+                           th:text="${lecture.getLectureName()}">
+                        </a>
+                    </div>
+                    <div class="lecture"></div>
+                </div>
+                <div class="list">
+                    <h3>Wednesday</h3>
+                    <div class="lecture" th:each="lecture : ${wednesday}">
+                        <a class="clickable spacing centered"
+                           th:if="${lecture != null}"
+                           th:href="${role == 'teacher'} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}"
+                           th:text="${lecture.getLectureName()}">
+                        </a>
+                    </div>
+                    <div class="lecture"></div>
+                </div>
+                <div class="list">
+                    <h3>Thursday</h3>
+                    <div class="lecture" th:each="lecture : ${thursday}">
+                        <a class="clickable spacing centered"
+                           th:if="${lecture != null}"
+                           th:href="${role == 'teacher'} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}"
+                           th:text="${lecture.getLectureName()}">
+                        </a>
+                    </div>
+                    <div class="lecture"></div>
+                </div>
+                <div class="list">
+                    <h3>Friday</h3>
+                    <div class="lecture" th:each="lecture : ${friday}">
+                        <a class="clickable spacing centered"
+                           th:if="${lecture != null}"
+                           th:href="${role == 'teacher'} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}"
+                           th:text="${lecture.getLectureName()}">
+                        </a>
+                    </div>
+                    <div class="lecture"></div>
+                </div>
+                <div class="list">
+                    <h3>Saturday</h3>
+                    <div class="lecture" th:each="lecture : ${saturday}">
+                        <a class="clickable spacing centered"
+                           th:if="${lecture != null}"
+                           th:href="${role == 'teacher'} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}"
+                           th:text="${lecture.getLectureName()}">
+                        </a>
+                    </div>
+                    <div class="lecture"></div>
+                </div>
+                <div class="list">
+                    <h3>Sunday</h3>
+                    <div class="lecture" th:each="lecture : ${sunday}">
+                        <a class="clickable spacing centered"
+                           th:if="${lecture != null}"
+                           th:href="${role == 'teacher'} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}"
+                           th:text="${lecture.getLectureName()}">
+                        </a>
+                    </div>
+                    <div class="lecture"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

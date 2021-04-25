@@ -4,7 +4,6 @@ import com.example.demo.Model.Course;
 import com.example.demo.Repository.ICourseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -21,6 +20,11 @@ public class CourseServiceImpl implements ICourseService {
     @Override
     public List<Course> findCourseByClassId(int id) {
         return courseRepo.findCourseByClassId(id);
+    }
+
+    @Override
+    public List<Course> findCourseByUserId(int id) {
+        return courseRepo.findCourseByUserId(id);
     }
 
     @Override

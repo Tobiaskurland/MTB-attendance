@@ -23,9 +23,6 @@ public class LoginController {
     @Autowired
     SignupService signupService;
 
-    //The loggedIn user
-    private User user;
-
     //Is the user a teacher?
     private boolean teacher;
 
@@ -56,16 +53,10 @@ public class LoginController {
             return "redirect:/";
 
         } else{ //Else set the user to this.user
-            this.user = user;
 
-            //Check if the user is a teacher - HARDCODED.....
-            if (this.user.getFirstName().equals("Mathias") && this.user.getLastName().equals("Hønberg")){
-                this.teacher = true;
-            }
+            session.setAttribute("login", user);
 
-            session.setAttribute("login", this.user);
-
-            return "redirect:/home";
+            return "redirect:/overview";
         }
     }
 

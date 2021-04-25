@@ -1,0 +1,136 @@
+:root{
+    --primary: #00dd00;
+    --primary-hovered: #009900;
+    --primary-clicked: #005500;
+    --shadow: #888888;
+    --shadow-light: #dddddd;
+    --text-primary: black;
+    --text-controls: white;
+}
+
+body{
+    margin: 0;
+}
+
+.topbar{
+    width: 100vW;
+    height: 50px;
+    background-color: var(--primary);
+    box-shadow: 0px 0px 5px var(--shadow);
+    color: var(--text-controls);
+    font-size: 26px;
+    font-weight: bold;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+
+.centered{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spacing{
+    margin: 5px;
+}
+
+.flatlist{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    font-size: 24px;
+    margin: 20px;
+}
+
+.weeklist{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 14%;
+}
+
+@media only screen and (max-width: 768px){
+    .flatlist{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 10px;
+    }
+
+    .gridlist{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .weeklist{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .list{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .title{
+        font-size: 14px;
+        margin: 20px;
+    }
+}
+
+.numberinput{
+    width: 50px;
+}
+
+.clickable{
+    border-radius: 3px;
+    background-color: var(--primary);
+    box-shadow: 0px 0px 5px var(--shadow);
+    transition: 0.25s;
+    text-decoration: none;
+    color: var(--text-controls);
+    font-weight: bold;
+    padding: 10px;
+    border-style: none;
+    min-width: 60px;
+}
+
+.clickable:hover{
+    background-color: var(--primary-hovered);
+}
+
+.clickable:active{
+    background-color: var(--primary-clicked);
+    zoom: 0.8;
+}
+
+.lecture{
+    height: 60px;
+    border-top: 1px var(--shadow-light) solid;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+form{
+    margin-left: 10px;
+}
+
+form>*{
+    margin: 5px;
+}
+
+h3{
+    font-weight: bold;
+}
