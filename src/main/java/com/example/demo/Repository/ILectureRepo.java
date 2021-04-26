@@ -3,6 +3,7 @@ package com.example.demo.Repository;
 import com.example.demo.Model.Course;
 import com.example.demo.Model.Lecture;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -25,4 +26,8 @@ public interface ILectureRepo extends JpaRepository<Lecture, Integer> {
 
     @Query(value = "select * from lecture where course_id = ?1 and date = ?2 order by date, time_interval", nativeQuery = true)
     List<Lecture> findLecturesByCourseIdForDate(int id, LocalDate date);
+
+    @Modifying
+    @Query(value = "UPDATE lecture SET verification_code = ?1, code_expire = NOW() WHERE lectureID = 1", nativeQuery = true)
+    void setGenerationCode(String code);
 }

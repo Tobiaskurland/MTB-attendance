@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <title>Code Attendance</title>
+</head>
+<body>
+<div>
+    <div class="topbar">
+        <a th:href="@{/logout}" style="position: absolute" class="clickable spacing centered" title="Logout"> Logout
+        </a>
+
+        <div class="centered">
+            <span th:text="${l.getLectureName()}"></span>
+        </div>
+    </div>
+    <div class="centered title" th:text="${'Lecture ' + time_interval + ' for day ' + date}">Lectures</div>
+
+    <div class="centered title">
+
+        <!-- TEACHER -->
+        <div th:if="${role == 2}" >
+            <div th:if="${generatedCode == null}">
+                <a class="modal-content" th:href="${'/GenerateCode/'} + ${lectureid}">
+                    <button type="submit" class="w3-right w3-green button">Generate Code</button>
+                </a>
+            </div>
+            <div th:if="${generatedCode != null}">
+                <span th:text="${generatedCode}"></span>
+            </div>
+        </div>
+
+        <!-- STUDENT -->
+        <div th:if="${role == 1}">
+            <form th:action="@{'/StudentCode/'} + ${lectureid}" method="post">
+                <label class="centered title">Enter code:</label>
+                <input class="form-control"
+                       type="text"
+                       th:value="${enteredCode}" id="enteredCode" name="enteredCode"/>
+            <!--<a class="modal-content" th:href="${'/StudentCode/'} + ${lectureid}">-->
+                <button type="submit" class="w3-right w3-green button">Confirm</button>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

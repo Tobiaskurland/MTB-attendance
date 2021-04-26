@@ -43,6 +43,7 @@ public class OverviewController
             model.addAttribute("year", year);
             model.addAttribute("lectures", lectures);
             model.addAttribute("course", course);
+            model.addAttribute("role", user.getRole_id());
 
             LocalDate monday = LocalDate.now()
                     .withYear(year)
