@@ -17,7 +17,6 @@ public interface ILectureRepo extends JpaRepository<Lecture, Integer> {
     @Query("select l from Lecture l where l.course_id = ?1")
     List<Lecture> findLectureByCourse_id(int id);
 
-
     @Query(value = "select * from lecture l where l.course_id = ?1 and l.date < CURDATE()", nativeQuery = true)
     List<Lecture> findLectureByCourseAndDate(int course_id);
 
@@ -27,7 +26,6 @@ public interface ILectureRepo extends JpaRepository<Lecture, Integer> {
     @Query(value = "select * from lecture where course_id = ?1 and date = ?2 order by date, time_interval", nativeQuery = true)
     List<Lecture> findLecturesByCourseIdForDate(int id, LocalDate date);
 
-    @Modifying
-    @Query(value = "UPDATE lecture SET verification_code = ?1, code_expire = NOW() WHERE lectureID = 1", nativeQuery = true)
-    void setGenerationCode(String code);
+    @Query(value = "select * from lecture where lectureID = ?1 and verification_code = ?2 and code_expire > NOW()", nativeQuery = true)
+    Lecture matchingCodes(int id, String enteredCode);
 }

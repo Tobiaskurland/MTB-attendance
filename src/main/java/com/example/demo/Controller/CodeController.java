@@ -1,10 +1,14 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Model.Attendance;
 import com.example.demo.Model.Lecture;
 import com.example.demo.Model.User;
+import com.example.demo.Service.AttendanceServiceImpl;
+import com.example.demo.Service.IAttendanceService;
 import com.example.demo.Service.ILectureService;
 import com.example.demo.Utility.GenerateCode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 @Controller
@@ -25,6 +30,9 @@ public class CodeController {
 
     @Autowired
     ILectureService lectureService;
+
+    @Autowired
+    AttendanceServiceImpl attendanceService;
 
     @CrossOrigin
     @GetMapping("/lecture/{lectureid}/attendance/createcode")
@@ -88,7 +96,7 @@ public class CodeController {
     @GetMapping("/GenerateCode/{id}")
     public String GenerateCode(HttpSession session, Model model, @PathVariable int id){
 
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5));
 
         String code = utility.randomAlphanumericString();
 
@@ -105,11 +113,30 @@ public class CodeController {
 
     @CrossOrigin
     @PostMapping("/StudentCode/{id}")
-    public String StudentCode(@PathVariable int id, @ModelAttribute("enteredCode") String enteredCode){
-        String code = enteredCode;
+    public String StudentCode(HttpSession session, @PathVariable int id, @ModelAttribute("enteredCode") String enteredCode){
 
-        log.info("Code: " + code);
+        if (session.getAttribute("login") != null) {
 
-        return "redirect:/lecture/" + id + "attendance";
+            //Get the user from the session
+            User u = (User)session.getAttribute("login");
+
+            //See if the code matches the one in the database
+            Lecture l = lectureService.matchingCodes(id, enteredCode);
+
+            if (l != null) {
+                Attendance a = new Attendance();
+
+                a.setUser_id(u.getUserId());
+                a.setLecture_id(id);
+
+                attendanceService.save(a);
+            }
+
+            log.info("Code: " + enteredCode);
+
+            return "redirect:/lecture/" + id + "/attendance";
+        }
+
+        return "error";
     }
 }

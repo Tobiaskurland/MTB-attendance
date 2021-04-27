@@ -14,4 +14,5 @@ public interface IAttendanceRepo extends JpaRepository<Attendance, Integer> {
 
     @Query("SELECT a from Attendance a where a.user_id = ?1")
     List<Attendance> getAttendanceByUser_id(int id);
+
 }

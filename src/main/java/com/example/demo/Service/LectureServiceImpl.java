@@ -49,8 +49,8 @@ public class LectureServiceImpl implements ILectureService{
     }
 
     @Override
-    public void setGenerationCode(String code) {
-        lectureRepo.setGenerationCode(code);
+    public Lecture matchingCodes(int id, String enteredCode) {
+        return lectureRepo.matchingCodes(id, enteredCode);
     }
 
     @Override
