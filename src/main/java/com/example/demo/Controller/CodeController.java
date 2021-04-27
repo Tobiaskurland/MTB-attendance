@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -34,6 +35,7 @@ public class CodeController {
     @Autowired
     AttendanceServiceImpl attendanceService;
 
+    //Initial page - TEACHER
     @CrossOrigin
     @GetMapping("/lecture/{lectureid}/attendance/createcode")
     public String TeacherAttendance(HttpSession session, Model model, @PathVariable int lectureid){
@@ -64,6 +66,7 @@ public class CodeController {
         }
     }
 
+    //Initial page - STUDENT
     @CrossOrigin
     @GetMapping("/lecture/{lectureid}/attendance")
     public String StudentAttendance(HttpSession session, Model model, @PathVariable int lectureid){
@@ -92,33 +95,43 @@ public class CodeController {
         }
     }
 
+    //Generate code function - TEACHER
     @CrossOrigin
     @GetMapping("/GenerateCode/{id}")
     public String GenerateCode(HttpSession session, Model model, @PathVariable int id){
 
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5));
+        if (session.getAttribute("login") != null) {
 
-        String code = utility.randomAlphanumericString();
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5));
 
-        Lecture l = lectureService.findById(id);
-        l.setVerificationCode(code);
-        l.setCodeExpire(timestamp);
+            String code = utility.randomAlphanumericString();
 
-        lectureService.save(l);
+            Lecture l = lectureService.findById(id);
+            l.setVerificationCode(code);
+            l.setCodeExpire(timestamp);
 
-        log.info("Generated Code: " + code);
+            lectureService.save(l);
 
-        return "redirect:/lecture/" + l.getLectureId() + "/attendance/createcode";
+            log.info("Generated Code: " + code);
+
+            return "redirect:/lecture/" + l.getLectureId() + "/attendance/createcode";
+        }
+
+        return "error";
     }
 
+    //Enter code function - STUDENT
     @CrossOrigin
     @PostMapping("/StudentCode/{id}")
-    public String StudentCode(HttpSession session, @PathVariable int id, @ModelAttribute("enteredCode") String enteredCode){
+    public String StudentCode(HttpSession session, Model model, @PathVariable int id, @ModelAttribute("enteredCode") String enteredCode){
 
         if (session.getAttribute("login") != null) {
 
             //Get the user from the session
             User u = (User)session.getAttribute("login");
+
+            //boolean to check if the entered code is wrong
+            //boolean wrongCode = false;
 
             //See if the code matches the one in the database
             Lecture l = lectureService.matchingCodes(id, enteredCode);
@@ -130,11 +143,56 @@ public class CodeController {
                 a.setLecture_id(id);
 
                 attendanceService.save(a);
+
+                return "redirect:/success/" + id;
+            }else {
+
+                return "redirect:/incorrect/" + id;
             }
+        }
 
-            log.info("Code: " + enteredCode);
+        return "error";
+    }
 
-            return "redirect:/lecture/" + id + "/attendance";
+    @CrossOrigin
+    @GetMapping("/success/{id}")
+    public String Success(HttpSession session, @PathVariable int id, Model model){
+
+        if (session.getAttribute("login") != null){
+
+            //Get the user from the session
+            User u = (User)session.getAttribute("login");
+
+            //Get the current lecture
+            Lecture l = lectureService.findById(id);
+
+            //Data we need on the HTML
+            model.addAttribute("l", l.getLectureName());
+
+            return "success";
+        }
+
+        return "error";
+    }
+
+    @CrossOrigin
+    @GetMapping("/incorrect/{id}")
+    public String Incorrect(HttpSession session, @PathVariable int id, Model model, HttpServletRequest request){
+
+        if (session.getAttribute("login") != null){
+
+            //Get the user from the session
+            User u = (User)session.getAttribute("login");
+
+            //Get the current lecture
+            Lecture l = lectureService.findById(id);
+
+            //Data we need on the HTML
+            model.addAttribute("l", l.getLectureName());
+            model.addAttribute("lectureid", id);
+
+            return "incorrect";
+
         }
 
         return "error";
