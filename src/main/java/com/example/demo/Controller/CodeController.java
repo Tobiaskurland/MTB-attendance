@@ -4,11 +4,9 @@ import com.example.demo.Model.Attendance;
 import com.example.demo.Model.Lecture;
 import com.example.demo.Model.User;
 import com.example.demo.Service.AttendanceServiceImpl;
-import com.example.demo.Service.IAttendanceService;
 import com.example.demo.Service.ILectureService;
 import com.example.demo.Utility.GenerateCode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
@@ -102,10 +99,13 @@ public class CodeController {
 
         if (session.getAttribute("login") != null) {
 
+            //Set the CODE_EXPIRE to 5 minutes after NOW()
             Timestamp timestamp = new Timestamp(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5));
 
+            //Get the random generated alphanumeric string
             String code = utility.randomAlphanumericString();
 
+            //A good/bad way to UPDATE in JPA?
             Lecture l = lectureService.findById(id);
             l.setVerificationCode(code);
             l.setCodeExpire(timestamp);
@@ -114,6 +114,7 @@ public class CodeController {
 
             log.info("Generated Code: " + code);
 
+            //"Reload" the page with the new generated code
             return "redirect:/lecture/" + l.getLectureId() + "/attendance/createcode";
         }
 
@@ -130,12 +131,10 @@ public class CodeController {
             //Get the user from the session
             User u = (User)session.getAttribute("login");
 
-            //boolean to check if the entered code is wrong
-            //boolean wrongCode = false;
-
             //See if the code matches the one in the database
             Lecture l = lectureService.matchingCodes(id, enteredCode);
 
+            //If the codes matches give the Student attendance to that lecture
             if (l != null) {
                 Attendance a = new Attendance();
 
@@ -144,7 +143,10 @@ public class CodeController {
 
                 attendanceService.save(a);
 
+                //Go to the success-page
                 return "redirect:/success/" + id;
+
+            //Else redirect to incorrect-page
             }else {
 
                 return "redirect:/incorrect/" + id;
