@@ -6,24 +6,85 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
+<style>
+    .float-container {
+        border: 3px solid #fff;
+        padding: 20px;
+    }
+
+    .float-child {
+        width: 15%;
+        float: left;
+        padding-right: 6%;
+    }
+    .dropdown{
+        width: 150%;
+    }
+</style>
+
 <body>
+
+<div class="topbar centered" style="background-color: #00dd00">Statistics</div>
 
     <div style="margin-left: 20px">
         <br><br><br><br>
 
-        <form th:action="@{'/student/statistics/result'}" method="get">
-            <select th:name="course" class="btn btn-secondary dropdown-toggle dropdown-option" required>
-                <option th:if="${course} != 0" value="" selected disabled hidden>Select course</option>
-                <option th:each="c: ${courses}" th:text="${c.courseName}" th:value="${c.courseId}" th:selected="(${c.courseId} == *{course})"></option>
-            </select>
+        <div th:if="${user.role_id} == 1">
+            <form th:action="@{'/student/statistics/result'}" method="get">
+                <select th:name="course" class="btn btn-secondary dropdown-toggle dropdown-option" required>
+                    <option th:if="${course} != 0" value="" selected disabled hidden>Select course</option>
+                    <option th:each="c: ${courses}" th:text="${c.courseName}" th:value="${c.courseId}" th:selected="(${c.courseId} == *{course})"></option>
+                </select>
 
-            <button type="submit" class="w3-button w3-black">Search</button>
-        </form>
+                <button type="submit" class="w3-button w3-black">Search</button>
+            </form>
+        </div>
 
-        <br><br>
+        <div th:if="${user.role_id} != 1" class="float-container">
+
+            <div class="float-child">
+
+                <form th:action="@{'/teacher/statistics'}" method="get">
+                    <select th:name="classId" class="btn btn-secondary dropdown-toggle dropdown-option dropdown" onchange="this.form.submit()">
+                        <option th:if="${class} == 0" value="" selected disabled >Select class</option>
+                        <option th:each="cl: ${classes}" th:text="${cl.className}" th:value="${cl.classId}" th:selected="(${cl.classId} == *{class})"></option>
+                    </select>
+                </form>
+            </div>
+
+            <div class="float-child">
+
+                <form th:action="@{'/teacher/statistics'}" method="get">
+                    <input type="hidden" th:name="classId" th:value="${class}">
+                    <select th:name="courseId" class="btn btn-secondary dropdown-toggle dropdown-option dropdown" onchange="this.form.submit()">
+                        <option th:if="${course} == 0" value="" selected disabled >Select course</option>
+                        <option th:each="c: ${courses}" th:text="${c.courseName}" th:value="${c.courseId}" th:selected="(${c.courseId} == *{course})"></option>
+                    </select>
+                </form>
+            </div>
+
+            <div class="float-child">
+
+                <form th:action="@{'/teacher/statistics'}" method="get">
+                    <input type="hidden" th:name="classId" th:value="${class}">
+                    <input type="hidden" th:name="courseId" th:value="${course}">
+                    <select th:name="studentId" class="btn btn-secondary dropdown-toggle dropdown-option" onchange="this.form.submit()">
+                        <option th:if="${student} != 0" value="" selected disabled >Select student</option>
+                        <option th:each="s: ${students}" th:text="${s.firstName + ' ' + s.lastName}" th:value="${s.userId}" th:selected="(${s.userId} == *{student})"></option>
+                    </select>
+                </form>
+
+            </div>
+
+
+        </div>
+
+        <br><br><br>
         <h4 th:text="${'Attendance up to and including today:.......' + percent + '%'}"></h4>
         <h4 th:text="${'Absence for whole period:...........................' + absencePercent + '%'}"></h4>
         <h4 th:text="${'Attended modules:........................................' + attendedLectures}"></h4>
@@ -31,7 +92,7 @@
         <div class="w3-col m7">
             <table class="table table-bordered table-striped" style="width: 165%">
 
-                <thead class="thead-dark">
+                <thead>
                 <tr>
                     <th style="width: 18%">Course Name</th>
                     <th style="width: 12%">Lecture Name</th>

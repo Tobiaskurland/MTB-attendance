@@ -19,6 +19,11 @@ public class UserServiceImpl implements IUserService{
     }
 
     @Override
+    public List<User> findUsersByClassAndCourse(int class_id, int course_id) {
+        return userRepo.findUsersByClassAndCourse(class_id, course_id);
+    }
+
+    @Override
     public User findById(int id) {
         return userRepo.findUserById(id);
     }

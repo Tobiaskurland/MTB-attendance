@@ -28,6 +28,11 @@ public class CourseServiceImpl implements ICourseService {
     }
 
     @Override
+    public List<Course> findByClassAndUser(int class_id, int user_id) {
+        return courseRepo.findByClassAndUser(class_id, user_id);
+    }
+
+    @Override
     public Course findById(int id) {
         return courseRepo.getOne(id);
     }

@@ -12,6 +12,7 @@ public interface ICourseService {
     List<Course> findAll();
     List<Course> findCourseByClassId(int id);
     List<Course> findCourseByUserId(int id);
+    List<Course> findByClassAndUser(int class_id, int user_id);
     Course findById(int id);
     void deleteById(int id);
     void save(Course course);
