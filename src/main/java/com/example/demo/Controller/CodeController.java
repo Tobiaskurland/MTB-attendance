@@ -50,6 +50,15 @@ public class CodeController {
 
             //Get the current lecture
             Lecture l = lectureService.findById(lectureid);
+            String timer = null;
+
+            if(l.getCodeExpire() != null){
+
+                Date d = l.getCodeExpire();
+
+                DateFormat targetFormat = new SimpleDateFormat("MMM d, yyyy HH:mm:ss");
+                timer = targetFormat.format(d);
+            }
 
             //Data we need on the HTML
             model.addAttribute("role", u.getRole_id());
@@ -58,7 +67,9 @@ public class CodeController {
             model.addAttribute("time_interval", l.getTimeInterval());
             model.addAttribute("lectureid", lectureid);
             model.addAttribute("generatedCode", l.getVerificationCode());
+            model.addAttribute("timer", timer);
 
+            log.info("TIMER: " + timer);
 
             return "CodeAttendance";
         }else {
@@ -99,7 +110,7 @@ public class CodeController {
             model.addAttribute("lectureid", lectureid);
             model.addAttribute("timer", timer);
 
-            log.info("Generated Code: " + timer);
+            log.info("TIMER: " + timer);
 
             return "CodeAttendance";
         }else {
@@ -126,7 +137,6 @@ public class CodeController {
             Lecture l = lectureService.findById(id);
             l.setVerificationCode(code);
             l.setCodeExpire(timestamp);
-
             lectureService.save(l);
 
             log.info("Generated Code: " + code);
