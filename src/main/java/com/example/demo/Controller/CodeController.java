@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
@@ -66,7 +71,7 @@ public class CodeController {
     //Initial page - STUDENT
     @CrossOrigin
     @GetMapping("/lecture/{lectureid}/attendance")
-    public String StudentAttendance(HttpSession session, Model model, @PathVariable int lectureid){
+    public String StudentAttendance(HttpSession session, Model model, @PathVariable int lectureid) throws ParseException {
 
         //If a user is loggedIn
         if (session.getAttribute("login") != null){
@@ -76,6 +81,15 @@ public class CodeController {
 
             //Get the current lecture
             Lecture l = lectureService.findById(lectureid);
+            String timer = null;
+
+            if(l.getCodeExpire() != null){
+
+                Date d = l.getCodeExpire();
+
+                DateFormat targetFormat = new SimpleDateFormat("MMM d, yyyy HH:mm:ss");
+                timer = targetFormat.format(d);
+            }
 
             //Data we need on the HTML
             model.addAttribute("role", u.getRole_id());
@@ -83,6 +97,9 @@ public class CodeController {
             model.addAttribute("date", l.getDate());
             model.addAttribute("time_interval", l.getTimeInterval());
             model.addAttribute("lectureid", lectureid);
+            model.addAttribute("timer", timer);
+
+            log.info("Generated Code: " + timer);
 
             return "CodeAttendance";
         }else {
@@ -100,7 +117,7 @@ public class CodeController {
         if (session.getAttribute("login") != null) {
 
             //Set the CODE_EXPIRE to 5 minutes after NOW()
-            Timestamp timestamp = new Timestamp(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5));
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(1));
 
             //Get the random generated alphanumeric string
             String code = utility.randomAlphanumericString();
