@@ -27,6 +27,7 @@ public class LoginRepoImpl implements LoginRepo{
                 user.setFirstName(resultSet.getString("first_name"));
                 user.setLastName(resultSet.getString("last_name"));
                 user.setEmail(resultSet.getString("email"));
+                user.setRole_id((resultSet.getInt("role_id")));
                 return user;
             }
             return null;

@@ -45,8 +45,6 @@ public class OverviewController
             model.addAttribute("course", course);
             model.addAttribute("role", user.getRole_id());
 
-            System.out.println(user.getRole_id());
-
             LocalDate monday = LocalDate.now()
                     .withYear(year)
                     .with(IsoFields.WEEK_OF_WEEK_BASED_YEAR, weekNumber)

@@ -22,5 +22,13 @@ public interface ICourseRepo extends JpaRepository<Course, Integer> {
             "where uc.user_id = ?1 ", nativeQuery = true)
     List<Course> findCourseByUserId(int userId);
 
+    @Query(value = "select c.* from user_course uc " +
+            "join course_class cc on uc.course_class_id = cc.idcourse_class " +
+            "join course c on cc.course_id = c.courseID " +
+            "join class cl on cl.classID = cc.class_id " +
+            "join user_class ucl on ucl.user_id = uc.user_id and ucl.class_id = cl.classID " +
+            "where uc.user_id = ?2 and cl.classID = ?1", nativeQuery = true)
+    List<Course> findByClassAndUser(int class_id, int user_id);
+
 
 }

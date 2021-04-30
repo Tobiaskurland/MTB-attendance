@@ -49,6 +49,11 @@ public class LectureServiceImpl implements ILectureService{
     }
 
     @Override
+    public Lecture matchingCodes(int id, String enteredCode) {
+        return lectureRepo.matchingCodes(id, enteredCode);
+    }
+
+    @Override
     public List<Lecture> findLecturesByCourseIdForDate(int id, LocalDate date)
     {
         return lectureRepo.findLecturesByCourseIdForDate(id, date);
