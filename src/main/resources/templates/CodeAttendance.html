@@ -18,7 +18,7 @@
     </div>
     <div class="centered title" th:text="${'Lecture ' + time_interval + ' for day ' + date}">Lectures</div>
 
-    <div class="centered title">
+    <div th:if="${!hasCodeExpired}" class="centered title">
 
         <!-- TEACHER -->
         <div th:if="${role == 2}" >
@@ -47,7 +47,7 @@
 
     <!-- TIMER -->
     <div th:if="${timer != null}" class="centered title">
-        <p id="demo"></p>
+        <p id="countdown"></p>
     </div>
 
 </div>
@@ -74,13 +74,13 @@
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // Output the result in an element with id="demo"
-        document.getElementById("demo").innerHTML = "Expires in: <b>" + minutes + "m " + seconds + "s </b>";
+        // Output the result in an element with id="countdown"
+        document.getElementById("countdown").innerHTML = "Expires in: <b>" + minutes + "m " + seconds + "s </b>";
 
         // If the count down is over, write some text
         if (distance < 0) {
             clearInterval(x);
-            document.getElementById("demo").innerHTML = "<b style=\"color:red\">EXPIRED</b>";
+            document.getElementById("countdown").innerHTML = "<b style=\"color:red\">EXPIRED</b>";
         }
     }, 1000);
 </script>

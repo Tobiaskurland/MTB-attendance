@@ -17,6 +17,7 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -51,13 +52,20 @@ public class CodeController {
             //Get the current lecture
             Lecture l = lectureService.findById(lectureid);
             String timer = null;
+            boolean hasCodeExpired = false;
 
             if(l.getCodeExpire() != null){
 
                 Date d = l.getCodeExpire();
+                Date now = new Date();
 
                 DateFormat targetFormat = new SimpleDateFormat("MMM d, yyyy HH:mm:ss");
                 timer = targetFormat.format(d);
+
+                //Check if the time has expired so you cant generate a code anymore - HAS TO RELOAD SITE THOUGH
+                if (d.before(now)){
+                    hasCodeExpired = true;
+                }
             }
 
             //Data we need on the HTML
@@ -67,6 +75,7 @@ public class CodeController {
             model.addAttribute("time_interval", l.getTimeInterval());
             model.addAttribute("lectureid", lectureid);
             model.addAttribute("generatedCode", l.getVerificationCode());
+            model.addAttribute("hasCodeExpired", hasCodeExpired);
             model.addAttribute("timer", timer);
 
             log.info("TIMER: " + timer);
@@ -93,13 +102,20 @@ public class CodeController {
             //Get the current lecture
             Lecture l = lectureService.findById(lectureid);
             String timer = null;
+            boolean hasCodeExpired = false;
 
             if(l.getCodeExpire() != null){
 
                 Date d = l.getCodeExpire();
+                Date now = new Date();
 
                 DateFormat targetFormat = new SimpleDateFormat("MMM d, yyyy HH:mm:ss");
                 timer = targetFormat.format(d);
+
+                //Check if the time has expired so you cant enter code anymore - HAS TO RELOAD SITE THOUGH
+                if (d.before(now)){
+                    hasCodeExpired = true;
+                }
             }
 
             //Data we need on the HTML
@@ -108,6 +124,7 @@ public class CodeController {
             model.addAttribute("date", l.getDate());
             model.addAttribute("time_interval", l.getTimeInterval());
             model.addAttribute("lectureid", lectureid);
+            model.addAttribute("hasCodeExpired", hasCodeExpired);
             model.addAttribute("timer", timer);
 
             log.info("TIMER: " + timer);
@@ -158,11 +175,14 @@ public class CodeController {
             //Get the user from the session
             User u = (User)session.getAttribute("login");
 
-            //See if the code matches the one in the database
+            //Check if the code matches the one in the database
             Lecture l = lectureService.matchingCodes(id, enteredCode);
 
+            //Check if the student has already attended
+            Attendance attend = attendanceService.alreadyAttended(u.getUserId(), id);
+
             //If the codes matches give the Student attendance to that lecture
-            if (l != null) {
+            if (l != null && attend == null) {
                 Attendance a = new Attendance();
 
                 a.setUser_id(u.getUserId());

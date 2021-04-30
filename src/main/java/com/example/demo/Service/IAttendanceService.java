@@ -13,4 +13,5 @@ public interface IAttendanceService {
     Attendance findById(int id);
     void deleteById(int id);
     void save(Attendance attendanceEntity);
+    Attendance alreadyAttended(int userId, int lectureId);
 }
