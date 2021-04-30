@@ -1,9 +1,9 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Model.Attendance;
+import com.example.demo.Model.Lecture;
 import com.example.demo.Model.User;
-import com.example.demo.Service.IClazzService;
-import com.example.demo.Service.ICourseService;
-import com.example.demo.Service.IUserService;
+import com.example.demo.Service.*;
 import com.example.demo.Service.View.AttendanceOverviewImpl;
 import com.example.demo.Service.View.AttendanceViewServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -33,6 +34,12 @@ public class TeacherStatisticController {
     @Autowired
     AttendanceOverviewImpl attendanceOverview;
 
+    @Autowired
+    LectureServiceImpl lectureService;
+
+    @Autowired
+    AttendanceServiceImpl attendanceService;
+
 
     @GetMapping("/teacher/statistics")
     public String getStudentStatistics(Model model, HttpSession session, @RequestParam(value = "classId", defaultValue = "0") int classId,
@@ -51,11 +58,20 @@ public class TeacherStatisticController {
         User theUser = userService.findById(userId);
 
         double absencePercent = attendanceViewService.calculateAbsensePercent(studentId, courseId);
+        double attendancePercent = 0.0;
+
+        List<Lecture> lectuerByCourseAndDate = lectureService.findByCourseAndDate(courseId);
+        List<Attendance> attendanceList = attendanceService.findAllByUserId(studentId);
+
+        if (attendanceList.size() > 0 && lectuerByCourseAndDate.size() > 0){
+            attendancePercent = attendanceViewService.calculatePercent(attendanceList, lectuerByCourseAndDate);
+
+        }
 
         model.addAttribute("students", userService.findUsersByClassAndCourse(classId, courseId));
         model.addAttribute("studemt", studentId);
         model.addAttribute("user", theUser);
-        model.addAttribute("percent", 0.0);
+        model.addAttribute("percent", attendancePercent);
         model.addAttribute("classes", clazzService.findByUser(userId));
         model.addAttribute("class", classId);
         model.addAttribute("courses", courseService.findByClassAndUser(classId, userId));
