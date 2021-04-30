@@ -20,4 +20,5 @@ public interface ILectureService {
     void save(Lecture lecture);
     List<Lecture> findLecturesByCourseIdForWeek(int id, int weekNumber, int year);
     List<Lecture> findLecturesByCourseIdForDate(int id, LocalDate date);
+    Lecture matchingCodes(int id, String enteredCode);
 }

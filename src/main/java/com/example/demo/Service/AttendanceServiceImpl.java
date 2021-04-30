@@ -38,4 +38,8 @@ public class AttendanceServiceImpl implements IAttendanceService {
         attendanceRepo.save(attendanceEntity);
     }
 
+    @Override
+    public Attendance alreadyAttended(int userId, int lectureId) {
+        return attendanceRepo.alreadyAttended(userId, lectureId);
+    }
 }

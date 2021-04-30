@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <title>Code Attendance</title>
+</head>
+<body>
+<div>
+    <div class="topbar">
+        <a th:href="@{/logout}" style="position: absolute" class="clickable spacing centered" title="Logout"> Logout
+        </a>
+
+        <div class="centered">
+            <span th:text="${l.getLectureName()}"></span>
+        </div>
+    </div>
+    <div class="centered title" th:text="${'Lecture ' + time_interval + ' for day ' + date}">Lectures</div>
+
+    <div th:if="${!hasCodeExpired}" class="centered title">
+
+        <!-- TEACHER -->
+        <div th:if="${role == 2}" >
+            <div th:if="${generatedCode == null}">
+                <a class="modal-content" th:href="${'/GenerateCode/'} + ${lectureid}">
+                    <button type="submit" class="w3-right w3-green button">Generate Code</button>
+                </a>
+            </div>
+            <div th:if="${generatedCode != null}">
+                <span th:text="${generatedCode}"></span>
+            </div>
+        </div>
+
+        <!-- STUDENT -->
+        <div th:if="${role == 1}">
+            <form th:action="@{'/StudentCode/'} + ${lectureid}" method="post">
+                <label class="centered title">Enter code:</label>
+                <input class="form-control"
+                       type="text"
+                       th:value="${enteredCode}" id="enteredCode" name="enteredCode"/>
+                <button type="submit" class="w3-right w3-green button">Confirm</button>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- TIMER -->
+    <div th:if="${timer != null}" class="centered title">
+        <p id="countdown"></p>
+    </div>
+
+</div>
+
+<script>
+    // Set the date we're counting down to
+    var countDownDate = new Date("[[${timer}]]").getTime();
+    //var countDownDate = ([[${timer}]]).toString();
+    //let countDownDate = [[${timer}]];
+
+    console.log(countDownDate);
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+
+        // Get today's date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        //var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        //var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Output the result in an element with id="countdown"
+        document.getElementById("countdown").innerHTML = "Expires in: <b>" + minutes + "m " + seconds + "s </b>";
+
+        // If the count down is over, write some text
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("countdown").innerHTML = "<b style=\"color:red\">EXPIRED</b>";
+        }
+    }, 1000);
+</script>
+</body>
+</html>
