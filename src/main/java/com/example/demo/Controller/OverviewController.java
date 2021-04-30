@@ -43,6 +43,9 @@ public class OverviewController
             model.addAttribute("year", year);
             model.addAttribute("lectures", lectures);
             model.addAttribute("course", course);
+            model.addAttribute("role", user.getRole_id());
+
+            System.out.println(user.getRole_id());
 
             LocalDate monday = LocalDate.now()
                     .withYear(year)
@@ -83,14 +86,26 @@ public class OverviewController
         if(user != null)
         {
             List<Course> courses = courseService.findCourseByClassId(1);
+            List<Lecture> todaysLectures = lectureService.findLecturesByDate(LocalDate.now());
+
+            model.addAttribute("lectures", lecturesForDate(todaysLectures, LocalDate.now()));
 
             int weekNumber = LocalDate.now().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
             int year = LocalDate.now().getYear();
 
+            String statsUrl = "/student/statistics";
+
+            if(user.getRole_id() != 1)
+            {
+                statsUrl = "/teacher/statistics";
+            }
+
+            model.addAttribute("role", user.getRole_id());
             model.addAttribute("courses", courses);
             model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
             model.addAttribute("week", weekNumber);
             model.addAttribute("year", year);
+            model.addAttribute("statsUrl", statsUrl);
 
             return "Overview";
         }
@@ -131,11 +146,6 @@ public class OverviewController
             {
                 l.add(i, null);
             }
-        }
-
-        for (int i = 0; i < l.size(); i++)
-        {
-            System.out.println(i + " o: " + l.get(i));
         }
         return l;
     }

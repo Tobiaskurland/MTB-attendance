@@ -18,10 +18,11 @@ public class LoginRepoImpl implements LoginRepo{
 
     @Override
     public User findLogin(String firstName, String password) {
-        String sql = "SELECT userID, first_name, last_name, email FROM `user` WHERE first_name = ? AND password = ?";
+        String sql = "SELECT userID, first_name, last_name, email, role_id FROM `user` WHERE first_name = ? AND password = ?";
         User u = this.jdbc.query(sql, resultSet -> {
             User user = new User();
             while (resultSet.next()){
+                user.setRole_id(resultSet.getInt("role_id"));
                 user.setUserId(resultSet.getInt("userID"));
                 user.setFirstName(resultSet.getString("first_name"));
                 user.setLastName(resultSet.getString("last_name"));

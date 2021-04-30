@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <script th:src="@{/javascript/submitusers.js}"></script>
+    <title>Add users</title>
+</head>
+<body>
+    <div class="topbar centered">Add users</div>
+    <div>
+        <table class="">
+            <thead>
+                <tr>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody id="userList">
+                <tr>
+                    <td><input type="text"  th:id="fname1" ></td>
+                    <td><input type="text"  th:id="lname1" ></td>
+                    <td><input type="text"  th:id="email1" ></td>
+                    <td><input type="text"  th:id="pass1" ></td>
+                    <td>
+                        <select th:id="role1" value="1">
+                            <option value="1">Student</option>
+                            <option value="2">Teacher</option>
+                        </select>
+                    </td>
+                    <td><button id="addButton" class="clickable" onclick="addRow()">+</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="clickable" th:onclick="|submitUsers(${count})|">Submit</button>
+    </div>
+</body>
+</html>

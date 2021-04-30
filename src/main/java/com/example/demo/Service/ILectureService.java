@@ -15,6 +15,7 @@ public interface ILectureService {
     List<Lecture> findAll();
     List<Lecture> findByCourseId(int id);
     List<Lecture> findByCourseAndDate(int id);
+    List<Lecture> findLecturesByDate(LocalDate date);
     Lecture findById(int id);
     void deleteById(int id);
     void save(Lecture lecture);

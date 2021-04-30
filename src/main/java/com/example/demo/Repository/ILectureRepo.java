@@ -25,4 +25,7 @@ public interface ILectureRepo extends JpaRepository<Lecture, Integer> {
 
     @Query(value = "select * from lecture where course_id = ?1 and date = ?2 order by date, time_interval", nativeQuery = true)
     List<Lecture> findLecturesByCourseIdForDate(int id, LocalDate date);
+
+    @Query(value = "select * from lecture where date = ?1", nativeQuery = true)
+    List<Lecture> findLecturesByDate(LocalDate date);
 }

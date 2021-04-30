@@ -55,6 +55,12 @@ public class LectureServiceImpl implements ILectureService{
     }
 
     @Override
+    public List<Lecture> findLecturesByDate(LocalDate date)
+    {
+        return lectureRepo.findLecturesByDate(date);
+    }
+
+    @Override
     public List<Lecture> findLecturesByCourseIdForWeek(int id, int weekNumber, int year)
     {
         LocalDate startDate = LocalDate.now()
