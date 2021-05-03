@@ -1,20 +1,41 @@
 let count = 1;
 
+function getField(row, name)
+{
+    let field = row.getElementsByClassName(name)[0];
+
+    return field;
+}
+
 function submitUsers()
 {
     let users = [];
 
-    for(let i = 1; i <= count; i++)
+    let rows = document.getElementById("userList").childNodes;
+
+    for(let i = 0; i < rows.length; i++)
     {
+        let fname = getField(rows[i], "fname").value;
+        let lname = getField(rows[i], "lname").value;
+        let email = getField(rows[i], "email").value;
+        let pass = getField(rows[i], "pass").value;
+        let roleId = getField(rows[i], "role").value;
+
+        if(fname == "" || lname == "" || email == "" | pass == "" | roleId == "")
+        {
+            console.log("missing values in row" + i);
+            return;
+        }
+
         users.push(
             {
-                firstName: document.getElementById("fname" + i).value,
-                lastName: document.getElementById("lname" + i).value,
-                email: document.getElementById("email" + i).value,
-                password: document.getElementById("pass" + i).value,
-                role_id: document.getElementById("role" + i).value
+                firstName: fname,
+                lastName: lname,
+                email: email,
+                password: pass,
+                role_id: roleId
             }
-        )
+        );
     }
 
     let request = new XMLHttpRequest();
@@ -33,18 +54,19 @@ function submitUsers()
 function addRow()
 {
     count++;
-    let addButton = document.getElementById("addButton").remove();
+    document.getElementById("addButton").remove();
 
-    let html = '<tr><td><input type="text"  id="fname' + count + '" ></td>' +
-             '<td><input type="text"  id="lname' + count + '" ></td>' +
-             '<td><input type="text"  id="email' + count + '" ></td>' +
-             '<td><input type="text"  id="pass' + count + '" ></td>' +
+    let html = '<tr><td><input type="text"  id="fname" ></td>' +
+             '<td><input type="text"  class="lname" ></td>' +
+             '<td><input type="text"  class="email" ></td>' +
+             '<td><input type="text"  class="pass" ></td>' +
              '<td>' +
-                 '<select id="role' + count + '" value="1">' +
+                 '<select class="role" value="1">' +
                      '<option value="1">Student</option>' +
                      '<option value="2">Teacher</option>' +
                  '</select>' +
              '</td>' +
+             '<td><button class="clickable" onclick="addRow()">+</button></td></tr>' +
              '<td><button id="addButton" class="clickable" onclick="addRow()">+</button></td></tr>';
 
     document.getElementById("userList").insertAdjacentHTML("beforeend", html);
