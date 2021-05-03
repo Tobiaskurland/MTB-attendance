@@ -19,8 +19,18 @@ public class ClazzServiceImpl implements IClazzService{
     }
 
     @Override
-    public List<Clazz> findByUser(int id) {
-        return clazzRepo.findClassByUser(id);
+    public List<Clazz> findClassesByUser(int id) {
+        return clazzRepo.findClassesByUser(id);
+    }
+
+    @Override
+    public List<Clazz> findClassByUserAndCourse(int user_id, int course_id) {
+        return clazzRepo.findClassesByUserAndCourse(user_id, course_id);
+    }
+
+    @Override
+    public Clazz findClassByUserId(int id) {
+        return clazzRepo.findclassByUserId(id);
     }
 
     @Override

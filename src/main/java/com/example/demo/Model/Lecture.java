@@ -14,10 +14,13 @@ public class Lecture {
     private int timeInterval;
     private String verificationCode;
     private Timestamp codeExpire;
-    private int course_id;
+    private int course_class_id;
+
+    public Lecture(){}
 
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
     @Column(name = "lectureID")
     public int getLectureId() {
         return lectureId;
@@ -77,14 +80,14 @@ public class Lecture {
         this.codeExpire = codeExpire;
     }
 
-    @Column(name = "course_id")
+    @Column(name = "course_class_id")
     @Basic
-    public int getCourse_id() {
-        return course_id;
+    public int getCourse_class_id() {
+        return course_class_id;
     }
 
-    public void setCourse_id(int course_id) {
-        this.course_id = course_id;
+    public void setCourse_class_id(int course_id) {
+        this.course_class_id = course_id;
     }
 
     @Override

@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
     <title>Course overview</title>
+    <script src="http://www.w3schools.com/lib/w3data.js"></script>
 </head>
 <body>
     <div>
-        <div class="topbar centered" th:text="${course.getCourseName()}"></div>
+        <div w3-include-html="../../header"></div>
         <div>
             <div class="centered title" th:text="${'Lectures for week ' + week + ' (' + startdate + ' - ' + enddate + ')'}">Lectures</div>
             <form>
@@ -18,6 +19,10 @@
                 <input class="numberinput" id="weeknumber" name="weeknumber" type="number" th:value="${week}">
                 <input class="clickable" type="submit" value="submit">
             </form>
+
+            <a th:if="${role > 1}" th:href="@{'/course/' + ${course.courseId} + '/addLecture'}" class="clickable" style="position: relative;left: 90%;">+ Add lecture</a>
+
+            <br><br>
             <div  class="weeklist">
                 <div class="daylist">
                     <h3>Monday</h3>
@@ -100,5 +105,8 @@
         </div>
     </div>
 
+    <script>
+        w3IncludeHTML();
+    </script>
 </body>
 </html>
