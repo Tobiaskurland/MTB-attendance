@@ -1,7 +1,7 @@
 :root{
-    --primary: #00dd00;
-    --primary-hovered: #009900;
-    --primary-clicked: #005500;
+    --NOTprimary: #007bff;
+    --NOTprimary-hovered: #b3d7ff;
+    --primary-clicked: #004085;
     --shadow: #888888;
     --shadow-light: #dddddd;
     --text-primary: black;
@@ -10,7 +10,7 @@
 
 .checkmark{
     font-size: 50px;
-    color: var(--primary-hovered);
+    color: var(--NOTprimary-hovered);
 }
 
 .userTable{
@@ -37,7 +37,7 @@ body{
 .topbar{
     width: 100vW;
     height: 50px;
-    background-color: var(--primary);
+    background-color: var(--NOTprimary);
     box-shadow: 0px 0px 5px var(--shadow);
     color: var(--text-controls);
     font-size: 26px;
@@ -138,12 +138,12 @@ body{
 }
 
 .numberinput{
-    width: 50px;
+    width: 70px;
 }
 
 .clickable{
     border-radius: 3px;
-    background-color: var(--primary);
+    background-color: var(--NOTprimary);
     box-shadow: 0px 0px 5px var(--shadow);
     transition: 0.25s;
     text-decoration: none;
@@ -155,11 +155,13 @@ body{
 }
 
 .clickable:hover{
-    background-color: var(--primary-hovered);
+    background-color: var(--NOTprimary-hovered);
+    text-decoration: none;
 }
 
 .clickable:active{
     background-color: var(--primary-clicked);
+    text-decoration: none;
 }
 
 .lecture{

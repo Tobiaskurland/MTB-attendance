@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Lecture</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="http://www.w3schools.com/lib/w3data.js"></script>
+
+    <style>
+        .center-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-right: 50px;
+        }
+        .input-form{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div w3-include-html="../../header"></div>
+
+    <div style="margin-left: 20px">
+
+        <div class="center-screen">
+           <br><br>
+
+            <h2 th:text="${course.courseName + ' - Add Lecture'}"></h2>
+            <br><br>
+
+            <form th:action="@{'/course/' + ${course.courseId} + '/addLecture'}", method="post">
+
+                <h5>Lecture name</h5>
+                <input class="input-form" th:name="lectureName">
+                <br><br>
+
+                <h5>Lecture date</h5>
+                <input class="input-form btn btn-info" type="date" th:name="date">
+                <br><br>
+
+                <h5>Start lecture</h5>
+                <select th:name="startLecture" class="input-form btn btn-info dropdown-toggle dropdown-option">
+                    <option value="" selected disabled hidden>Select start lecture</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                </select>
+                <br><br>
+
+                <h5>End lecture</h5>
+                <select th:name="endLecture" class="input-form btn btn-info dropdown-toggle dropdown-option" >
+                    <option value="" selected disabled hidden>Select end lecture</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                </select>
+                <br><br>
+
+                <h5>Class</h5>
+                <select th:name="class_id" class="input-form btn btn-info dropdown-toggle dropdown-option">
+                    <option value="" selected disabled hidden>Select class</option>
+                    <option th:each="c : ${classes}" th:text="${c.className}" th:value="${c.classId}"></option>
+                </select>
+                <br><br>
+                <input class="clickable" value="Submit" type="submit">
+
+            </form>
+        </div>
+    </div>
+
+
+<script>
+    w3IncludeHTML();
+</script>
+</body>
+</html>

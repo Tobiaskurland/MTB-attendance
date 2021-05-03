@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class TeacherStatisticController {
@@ -60,7 +59,7 @@ public class TeacherStatisticController {
         double absencePercent = attendanceViewService.calculateAbsensePercent(studentId, courseId);
         double attendancePercent = 0.0;
 
-        List<Lecture> lectuerByCourseAndDate = lectureService.findByCourseAndDate(courseId);
+        List<Lecture> lectuerByCourseAndDate = lectureService.findByCourseAndDate(courseId, userId);
         List<Attendance> attendanceList = attendanceService.findAllByUserId(studentId);
 
         if (attendanceList.size() > 0 && lectuerByCourseAndDate.size() > 0){
@@ -72,7 +71,7 @@ public class TeacherStatisticController {
         model.addAttribute("studemt", studentId);
         model.addAttribute("user", theUser);
         model.addAttribute("percent", attendancePercent);
-        model.addAttribute("classes", clazzService.findByUser(userId));
+        model.addAttribute("classes", clazzService.findClassesByUser(userId));
         model.addAttribute("class", classId);
         model.addAttribute("courses", courseService.findByClassAndUser(classId, userId));
         model.addAttribute("course", courseId);

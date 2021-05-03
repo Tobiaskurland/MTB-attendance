@@ -1,9 +1,11 @@
 package com.example.demo.Service.View;
 
 import com.example.demo.Model.Attendance;
+import com.example.demo.Model.Clazz;
 import com.example.demo.Model.Lecture;
 import com.example.demo.Model.Views.AttendanceOverview;
 import com.example.demo.Model.Views.AttendanceView;
+import com.example.demo.Repository.IClazzRepo;
 import com.example.demo.Repository.ILectureRepo;
 import com.example.demo.Repository.View.IAttendanceOverviewRepo;
 import com.example.demo.Repository.View.IAttendanceViewRepo;
@@ -23,6 +25,9 @@ public class AttendanceViewServiceImpl implements IAttendanceViewService{
 
     @Autowired
     IAttendanceOverviewRepo attendanceOverviewRepo;
+
+    @Autowired
+    IClazzRepo clazzRepo;
 
     @Override
     public List<AttendanceView> findAll() {
@@ -51,7 +56,14 @@ public class AttendanceViewServiceImpl implements IAttendanceViewService{
 
     public double calculateAbsensePercent(int userId, int courseId){
 
-        List<Lecture> lectureByCourse = lectureRepo.findLectureByCourse_id(courseId);
+        int class_id = 0;
+
+        if (userId > 0){
+            Clazz theClass = clazzRepo.findclassByUserId(userId);
+            class_id = theClass.getClassId();
+        }
+
+        List<Lecture> lectureByCourse = lectureRepo.findLectureByCourse_id(courseId, class_id);
         List<AttendanceOverview> attendanceViewList = attendanceOverviewRepo.findByAbsence(userId, courseId);
 
         double absencePercent = 0.0;

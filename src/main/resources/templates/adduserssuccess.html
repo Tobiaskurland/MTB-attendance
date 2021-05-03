@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
     <title>Title</title>
+    <script src="http://www.w3schools.com/lib/w3data.js"></script>
 </head>
 <body>
-    <div class="topbar centered">Add users</div>
+    <div w3-include-html="../../header"></div>
     <div class="centered list full">
         <div class="checkmark">&#x2714;</div>
         <p>Users added</p>
         <a href="/overview" class="clickable">Return</a>
     </div>
+
+    <script>
+        w3IncludeHTML();
+    </script>
 </body>
 </html>

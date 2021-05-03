@@ -71,7 +71,7 @@ public class StudentStatisticController {
 
         List<AttendanceView> attendanceViewList = attendanceViewService.findAllByUserAndCourse(userId, course);
         LocalDate now = LocalDate.now();
-        List<Lecture> lectuerByCourseAndDate = lectureService.findByCourseAndDate(course);
+        List<Lecture> lectuerByCourseAndDate = lectureService.findByCourseAndDate(course, userId);
         List<Attendance> attendanceList = attendanceService.findAllByUserId(userId);
         double attendancePercent = 0.0;
 

@@ -30,5 +30,7 @@ public interface ICourseRepo extends JpaRepository<Course, Integer> {
             "where uc.user_id = ?2 and cl.classID = ?1", nativeQuery = true)
     List<Course> findByClassAndUser(int class_id, int user_id);
 
+    @Query(value = "select idcourse_class from course_class where class_id = ?1 and course_id = ?2", nativeQuery = true)
+    int findCourseClassByClassAndCourse(int class_id, int course_id);
 
 }

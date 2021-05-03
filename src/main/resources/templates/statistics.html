@@ -9,6 +9,9 @@
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Dynamic header -->
+    <script src="http://www.w3schools.com/lib/w3data.js"></script>
 </head>
 
 <style>
@@ -29,7 +32,8 @@
 
 <body>
 
-<div class="topbar centered" style="background-color: #00dd00">Statistics</div>
+    <!-- dynamic header -->
+    <div w3-include-html="../../header"></div>
 
     <div style="margin-left: 20px">
         <br><br><br><br>
@@ -151,5 +155,11 @@
 
     </div>
 
+
+    <script>
+
+        <!-- dynamic header -->
+        w3IncludeHTML();
+    </script>
 </body>
 </html>

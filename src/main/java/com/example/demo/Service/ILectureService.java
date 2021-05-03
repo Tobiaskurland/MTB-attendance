@@ -13,13 +13,15 @@ import java.util.List;
 public interface ILectureService {
 
     List<Lecture> findAll();
-    List<Lecture> findByCourseId(int id);
-    List<Lecture> findByCourseAndDate(int id);
+    List<Lecture> findByCourseId(int course_id, int class_id);
+    List<Lecture> findByCourseAndDate(int course_id, int user_id);
     List<Lecture> findLecturesByDate(LocalDate date);
     Lecture findById(int id);
     void deleteById(int id);
     void save(Lecture lecture);
-    List<Lecture> findLecturesByCourseIdForWeek(int id, int weekNumber, int year);
-    List<Lecture> findLecturesByCourseIdForDate(int id, LocalDate date);
+    void saveAll(List<Lecture> lecture);
+    List<Lecture> findLecturesByCourseIdForWeek(int id, int user_id, int weekNumber, int year);
+    List<Lecture> findLecturesByCourseIdForDate(int id, int user_id, LocalDate date);
     Lecture matchingCodes(int id, String enteredCode);
+    void saveLecture(Lecture lecture, int class_id, int startLecture, int  endLecture, int course_id);
 }

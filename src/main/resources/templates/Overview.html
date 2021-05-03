@@ -5,10 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
     <title>Overview</title>
+
+    <script src="http://www.w3schools.com/lib/w3data.js"></script>
+
+
 </head>
 <body>
+
     <div>
-        <div class="topbar centered" th:text="${'Hello ' + username}"></div>
+        <div w3-include-html="../../header"></div>
+        <!--- <div class="topbar centered" th:text="${'Hello ' + username}"></div> -->
         <div class="horizontal">
             <div class="list overviewspacing">
                 <div class="centered title">Your courses</div>
@@ -32,5 +38,9 @@
         </div>
 
     </div>
+
+    <script>
+        w3IncludeHTML();
+    </script>
 </body>
 </html>

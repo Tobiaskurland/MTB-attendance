@@ -11,7 +11,9 @@ import java.util.List;
 public interface IClazzService {
 
     List<Clazz> findAll();
-    List<Clazz> findByUser(int id);
+    List<Clazz> findClassesByUser(int id);
+    List<Clazz> findClassByUserAndCourse(int user_id, int course_id);
+    Clazz findClassByUserId(int id);
     Clazz findById(int id);
     void deleteById(int id);
     void save(Clazz clazz);
