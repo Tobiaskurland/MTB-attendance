@@ -5,17 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
     <title>Code Attendance</title>
+    <script src="http://www.w3schools.com/lib/w3data.js"></script>
 </head>
 <body>
 <div>
-    <div class="topbar">
-        <a th:href="@{/logout}" style="position: absolute" class="clickable spacing centered" title="Logout"> Logout
-        </a>
+    <div w3-include-html="../../header"></div>
 
-        <div class="centered">
-            <span th:text="${l.getLectureName()}"></span>
-        </div>
-    </div>
     <div class="centered title" th:text="${'Lecture ' + time_interval + ' for day ' + date}">Lectures</div>
 
     <div th:if="${!hasCodeExpired}" class="centered title">
@@ -53,6 +48,8 @@
 </div>
 
 <script>
+    w3IncludeHTML();
+
     // Set the date we're counting down to
     var countDownDate = new Date("[[${timer}]]").getTime();
     //var countDownDate = ([[${timer}]]).toString();

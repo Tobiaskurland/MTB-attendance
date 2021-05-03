@@ -36,7 +36,7 @@ public class OverviewController
 
         if(user != null)
         {
-            List<Lecture> lectures = lectureService.findLecturesByCourseIdForWeek(courseID, weekNumber, year);
+            List<Lecture> lectures = lectureService.findLecturesByCourseIdForWeek(courseID, user.getUserId(), weekNumber, year);
             Course course = courseService.findById(courseID);
 
             model.addAttribute("week", weekNumber);

@@ -5,9 +5,10 @@
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
     <script th:src="@{/javascript/submitusers.js}"></script>
     <title>Add users</title>
+    <script src="http://www.w3schools.com/lib/w3data.js"></script>
 </head>
 <body>
-    <div class="topbar centered">Add users</div>
+    <div w3-include-html="../../header"></div>
     <div>
         <table class="">
             <thead>
@@ -37,5 +38,9 @@
         </table>
         <button class="clickable" th:onclick="|submitUsers(${count})|">Submit</button>
     </div>
+
+    <script>
+        w3IncludeHTML();
+    </script>
 </body>
 </html>
