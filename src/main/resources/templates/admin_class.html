@@ -122,7 +122,7 @@
                 <span class="dot"></span>
                 <h3 th:text="${class.className}"></h3>
                 <div class="w3-half">
-                    <a>
+                    <a th:href="@{'/admin/' + ${class.classId} + '/updateClass'}">
                         <button class="w3-button w3-block w3-teal w3-section" title="Update">
                             <i class="fa fa-pencil"></i>
                     </button>

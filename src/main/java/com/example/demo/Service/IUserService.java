@@ -15,4 +15,6 @@ public interface IUserService {
     User findById(int id);
     void deleteById(int id);
     void save(User user);
+    List<User> findAllStudentsWithNoClass();
+    List<User> findALlStudentsWithClass(int classId);
 }

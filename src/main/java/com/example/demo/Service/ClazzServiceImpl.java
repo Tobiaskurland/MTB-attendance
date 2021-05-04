@@ -49,8 +49,8 @@ public class ClazzServiceImpl implements IClazzService{
     }
 
     @Override
-    public void save(Clazz clazz) {
-        clazzRepo.save(clazz);
+    public Clazz save(Clazz clazz) {
+        return clazzRepo.save(clazz);
     }
 
     @PersistenceContext

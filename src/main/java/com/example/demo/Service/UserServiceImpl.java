@@ -39,4 +39,14 @@ public class UserServiceImpl implements IUserService{
         userRepo.save(user);
 
     }
+
+    @Override
+    public List<User> findAllStudentsWithNoClass() {
+        return userRepo.findAllStudentsWithNoClass();
+    }
+
+    @Override
+    public List<User> findALlStudentsWithClass(int classId) {
+        return userRepo.findALlStudentsWithClass(classId);
+    }
 }
