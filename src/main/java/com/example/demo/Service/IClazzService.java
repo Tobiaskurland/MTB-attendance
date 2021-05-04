@@ -17,4 +17,5 @@ public interface IClazzService {
     Clazz findById(int id);
     void deleteById(int id);
     void save(Clazz clazz);
+    void deleteClass(int id);
 }

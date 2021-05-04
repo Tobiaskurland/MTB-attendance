@@ -107,7 +107,7 @@ public class AdminClassController {
 
         if(session.getAttribute("login") != null && u.getRole_id() == 3)
         {
-            clazzService.deleteById(classId);
+            clazzService.deleteClass(classId);
 
             log.info("Class deleted with ID: " + classId);
             return "redirect:/admin/class";
