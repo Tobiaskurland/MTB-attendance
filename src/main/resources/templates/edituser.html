@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit user</title>
+    <script src="http://www.w3schools.com/lib/w3data.js"></script>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<div>
+    <div w3-include-html="../../header"></div>
+    <div class="centered">
+        <form class="list form">
+            <label for="fname">First name:</label>
+            <input id="fname" name="fname" type="text" th:value="${user.getFirstName()}">
+            <label for="lname">Last name:</label>
+            <input id="lname" name="lname" type="text" th:value="${user.getLastName()}">
+            <label for="email">Email:</label>
+            <input id="email" name="email" type="text" th:value="${user.getEmail()}">
+            <label for="role">Role:</label>
+            <select id="role" name="role" th:value="${user.getRole_id()}">
+                <option value="1">Student</option>
+                <option value="2">Teacher</option>
+                <option value="3">Admin</option>
+            </select>
+            <input class="clickable" type="submit" value="submit"/>
+        </form>
+    </div>
+</div>
+<script>
+        w3IncludeHTML();
+    </script>
+</body>
+</html>

@@ -30,12 +30,13 @@
                         <select th:id="role1" value="1">
                             <option value="1">Student</option>
                             <option value="2">Teacher</option>
+                            <option value="3">Admin</option>
                         </select>
                     </td>
-                    <td><button id="addButton" class="clickable" onclick="addRow()">+</button></td>
                 </tr>
             </tbody>
         </table>
+        <button id="addButton" class="clickable" onclick="addRow()">+</button>
         <button class="clickable" th:onclick="|submitUsers(${count})|">Submit</button>
     </div>
 

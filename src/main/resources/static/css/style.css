@@ -172,6 +172,18 @@ body{
     justify-content: center;
 }
 
+table{
+    width: 100%;
+}
+
+td>button{
+    right: 0;
+}
+
+.form{
+    max-width: 300px;
+}
+
 form{
     margin-left: 10px;
 }
