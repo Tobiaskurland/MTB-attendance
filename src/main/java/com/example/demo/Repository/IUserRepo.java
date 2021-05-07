@@ -2,9 +2,11 @@ package com.example.demo.Repository;
 
 import com.example.demo.Model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -30,4 +32,8 @@ public interface IUserRepo extends JpaRepository<User, Integer> {
             "WHERE c.classID = ?1", nativeQuery = true)
     List<User> findALlStudentsWithClass(int classId);
 
+    @Transactional
+    @Modifying
+    @Query(value = "call delete_user(?1)", nativeQuery = true)
+    public int deepDeleteUser(int id);
 }

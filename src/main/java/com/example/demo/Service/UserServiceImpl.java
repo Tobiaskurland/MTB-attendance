@@ -41,6 +41,12 @@ public class UserServiceImpl implements IUserService{
     }
 
     @Override
+    public void deepDeleteUser(int id)
+    {
+        userRepo.deepDeleteUser(id);
+    }
+
+    @Override
     public List<User> findAllStudentsWithNoClass() {
         return userRepo.findAllStudentsWithNoClass();
     }

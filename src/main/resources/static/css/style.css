@@ -152,6 +152,8 @@ body{
     padding: 10px;
     border-style: none;
     min-width: 60px;
+    display: inline-block;
+    text-align: center;
 }
 
 .clickable:hover{
@@ -170,6 +172,18 @@ body{
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+table{
+    width: 100%;
+}
+
+td>button{
+    right: 0;
+}
+
+.form{
+    max-width: 300px;
 }
 
 form{

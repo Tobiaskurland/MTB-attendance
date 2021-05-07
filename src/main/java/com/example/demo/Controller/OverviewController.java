@@ -83,29 +83,37 @@ public class OverviewController
         User user = getLoggedInUser(session);
         if(user != null)
         {
-            List<Course> courses = courseService.findCourseByClassId(1);
-            List<Lecture> todaysLectures = lectureService.findLecturesByDate(LocalDate.now());
-
-            model.addAttribute("lectures", lecturesForDate(todaysLectures, LocalDate.now()));
-
-            int weekNumber = LocalDate.now().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
-            int year = LocalDate.now().getYear();
-
-            String statsUrl = "/student/statistics";
-
-            if(user.getRole_id() != 1)
+            System.out.println(user.getRole_id());
+            if(user.getRole_id() != 3)
             {
-                statsUrl = "/teacher/statistics";
+                List<Course> courses = courseService.findCourseByClassId(1);
+                List<Lecture> todaysLectures = lectureService.findLecturesByDate(LocalDate.now());
+
+                model.addAttribute("lectures", lecturesForDate(todaysLectures, LocalDate.now()));
+
+                int weekNumber = LocalDate.now().get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
+                int year = LocalDate.now().getYear();
+
+                String statsUrl = "/student/statistics";
+
+                if(user.getRole_id() != 1)
+                {
+                    statsUrl = "/teacher/statistics";
+                }
+
+                model.addAttribute("role", user.getRole_id());
+                model.addAttribute("courses", courses);
+                model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
+                model.addAttribute("week", weekNumber);
+                model.addAttribute("year", year);
+                model.addAttribute("statsUrl", statsUrl);
+
+                return "Overview";
             }
-
-            model.addAttribute("role", user.getRole_id());
-            model.addAttribute("courses", courses);
-            model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
-            model.addAttribute("week", weekNumber);
-            model.addAttribute("year", year);
-            model.addAttribute("statsUrl", statsUrl);
-
-            return "Overview";
+            else
+            {
+                return "admin";
+            }
         }
         else
         {
