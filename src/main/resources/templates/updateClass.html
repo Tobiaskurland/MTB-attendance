@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <title>Update Class</title>
+    <script src="http://www.w3schools.com/lib/w3data.js"></script>
+</head>
+<body>
+<div w3-include-html="../../header"></div>
+
+<div class="row" style="margin-left: 20px">
+
+    <div class="center-screen">
+        <br><br>
+
+        <h2>Update Class</h2>
+        <br><br>
+
+        <form th:action="@{'/admin/' + ${classId} + '/updateClass'}" method="post">
+
+            <h5>Class name</h5>
+            <input class="input-form" th:name="clazz.className">
+            <br><br>
+
+            <h5>Education</h5>
+            <select th:name="clazz.education_id" class="input-form btn btn-info dropdown-toggle dropdown-option">
+                <option value="" selected disabled hidden>Select education</option>
+                <option th:each="e : ${educations}" th:text="${e.educationName}" th:value="${e.educationId}"></option>
+            </select>
+            <br><br>
+
+            <h5>Add student(s) to class</h5>
+            <div th:each="s : ${students}">
+                <input type="checkbox" id="${s.firstName}" th:name="userIdList" th:value="${s.userId}">
+                <label for="${s.firstName}"><span th:text="${s.firstName} + ' ' + ${s.lastName}"></span></label><br>
+            </div><br>
+
+            <input class="clickable" value="Update class" type="submit">
+
+        </form>
+    </div>
+    <div class="pull-right" style="margin-top: 50px; margin-left: 50px">
+        <h2>Class students</h2>
+        <table class="table table-bordered table-striped" style="width: 250%">
+
+            <thead>
+            <tr>
+                <th style="width: 18%">First Name</th>
+                <th style="width: 12%">Last Name</th>
+                <th style="width: 10%">Email</th>
+
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="s : ${studentswithclass}">
+
+                <td th:text="${s.firstName}"></td>
+                <td th:text="${s.lastName}"></td>
+                <td th:text="${s.email}"></td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+
+<script>
+    w3IncludeHTML();
+</script>
+
+</body>
+</html>

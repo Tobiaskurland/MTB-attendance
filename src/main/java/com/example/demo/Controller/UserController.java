@@ -68,6 +68,50 @@ public class UserController
         return "edituser";
     }
 
+    @PostMapping("/users/edit/{id}")
+    public String subitUserEdit(@PathVariable int id,
+                                @RequestParam String fname,
+                                @RequestParam String lname,
+                                @RequestParam String email,
+                                @RequestParam int role,
+                                Model model)
+    {
+        User user = userService.findById(id);
+
+        user.setRole_id(role);
+        user.setFirstName(fname);
+        user.setLastName(lname);
+        user.setEmail(email);
+
+        System.out.println(fname);
+        System.out.println(user.getFirstName());
+
+        userService.save(user);
+
+        model.addAttribute("user", user);
+
+        return "adduserssuccess";
+    }
+
+    @GetMapping("users/delete/{id}")
+    public String deleteUserWarning(@PathVariable int id, Model model)
+    {
+        User u = userService.findById(id);
+
+        model.addAttribute("item", u.getFirstName() + " " + u.getLastName());
+        model.addAttribute("returnUrl", "/users");
+        model.addAttribute("deleteUrl", "/users/delete/" + u.getUserId() + "/confirm");
+        return "confirmdeletion";
+    }
+
+    @GetMapping("/users/delete/{id}/confirm")
+    public String deleteUser(@PathVariable int id)
+    {
+        userService.deepDeleteUser(id);
+
+        return "deleteusersuccess";
+    }
+
     private User getLoggedInUser(HttpSession session)
     {
         try

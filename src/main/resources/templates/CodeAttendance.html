@@ -9,7 +9,7 @@
 </head>
 <body>
 <div>
-    <div w3-include-html="../../header"></div>
+    <div w3-include-html="../../../header"></div>
 
     <div class="centered title" th:text="${'Lecture ' + time_interval + ' for day ' + date}">Lectures</div>
 
@@ -52,6 +52,7 @@
 
     // Set the date we're counting down to
     var countDownDate = new Date("[[${timer}]]").getTime();
+
     //var countDownDate = ([[${timer}]]).toString();
     //let countDownDate = [[${timer}]];
 

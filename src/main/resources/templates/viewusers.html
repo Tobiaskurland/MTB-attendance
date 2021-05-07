@@ -22,7 +22,7 @@
                 <td th:text="${user.getRole_id}"></td>
                 <td>
                     <a class="clickable" th:href="${'/users/edit/' + user.getUserId()}">edit</a>
-                    <a class="clickable">delete</a>
+                    <a class="clickable" th:href="${'/users/delete/' + user.getUserId()}">delete</a>
                 </td>
             </tr>
     </table>

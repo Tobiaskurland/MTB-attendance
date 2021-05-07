@@ -59,7 +59,7 @@ public class CodeController {
                 Date d = l.getCodeExpire();
                 Date now = new Date();
 
-                DateFormat targetFormat = new SimpleDateFormat("MMM d, yyyy HH:mm:ss");
+                DateFormat targetFormat = new SimpleDateFormat("MMM d, yyyy HH:mm:ss", Locale.US);
                 timer = targetFormat.format(d);
 
                 //Check if the time has expired so you cant generate a code anymore - HAS TO RELOAD SITE THOUGH
@@ -109,7 +109,7 @@ public class CodeController {
                 Date d = l.getCodeExpire();
                 Date now = new Date();
 
-                DateFormat targetFormat = new SimpleDateFormat("MMM d, yyyy HH:mm:ss");
+                DateFormat targetFormat = new SimpleDateFormat("MMM d, yyyy HH:mm:ss", new Locale("en"));
                 timer = targetFormat.format(d);
 
                 //Check if the time has expired so you cant enter code anymore - HAS TO RELOAD SITE THOUGH
@@ -145,7 +145,7 @@ public class CodeController {
         if (session.getAttribute("login") != null) {
 
             //Set the CODE_EXPIRE to 5 minutes after NOW()
-            Timestamp timestamp = new Timestamp(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(1));
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5));
 
             //Get the random generated alphanumeric string
             String code = utility.randomAlphanumericString();

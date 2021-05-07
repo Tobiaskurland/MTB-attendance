@@ -5,6 +5,11 @@ import com.example.demo.Repository.IClazzRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
+import javax.persistence.PersistenceContext;
+import javax.persistence.StoredProcedureQuery;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -44,7 +49,22 @@ public class ClazzServiceImpl implements IClazzService{
     }
 
     @Override
-    public void save(Clazz clazz) {
-        clazzRepo.save(clazz);
+    public Clazz save(Clazz clazz) {
+        return clazzRepo.save(clazz);
+    }
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Transactional
+    public void deleteClass(int id){
+        StoredProcedureQuery spInsert = entityManager.createStoredProcedureQuery("SP_DeleteClass");
+
+        spInsert.registerStoredProcedureParameter("Id", int.class, ParameterMode.IN);
+
+        spInsert.setParameter("Id", id);
+
+        spInsert.execute();
+
     }
 }

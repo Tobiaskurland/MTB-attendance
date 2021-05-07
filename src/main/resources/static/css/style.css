@@ -152,6 +152,8 @@ body{
     padding: 10px;
     border-style: none;
     min-width: 60px;
+    display: inline-block;
+    text-align: center;
 }
 
 .clickable:hover{

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <title>Add Class</title>
+    <script src="http://www.w3schools.com/lib/w3data.js"></script>
+</head>
+<body>
+<div w3-include-html="../../header"></div>
+
+<div style="margin-left: 20px">
+
+    <div class="center-screen">
+        <br><br>
+
+        <h2>Add Class</h2>
+        <br><br>
+
+        <form th:action="@{'/admin/addClass'}" method="post">
+
+            <h5>Class name</h5>
+            <input class="input-form" th:name="className">
+            <br><br>
+
+            <h5>Education</h5>
+            <select th:name="education_id" class="input-form btn btn-info dropdown-toggle dropdown-option">
+                <option value="" selected disabled hidden>Select education</option>
+                <option th:each="e : ${educations}" th:text="${e.educationName}" th:value="${e.educationId}"></option>
+            </select>
+            <br><br>
+
+            <input class="clickable" value="Add class" type="submit">
+
+        </form>
+    </div>
+</div>
+
+<script>
+    w3IncludeHTML();
+</script>
+
+</body>
+</html>

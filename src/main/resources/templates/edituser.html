@@ -10,7 +10,7 @@
 <div>
     <div w3-include-html="../../header"></div>
     <div class="centered">
-        <form class="list form">
+        <form class="list form" method="post">
             <label for="fname">First name:</label>
             <input id="fname" name="fname" type="text" th:value="${user.getFirstName()}">
             <label for="lname">Last name:</label>
