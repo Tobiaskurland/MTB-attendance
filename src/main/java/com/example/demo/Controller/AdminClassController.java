@@ -166,18 +166,30 @@ public class AdminClassController {
 
 //DELETE CLASS
     @GetMapping("/admin/{classId}/deleteClass")
-    public String deleteClass(@PathVariable int classId, HttpSession session){
+    public String deleteClass(@PathVariable int classId, HttpSession session, Model model){
 
         //Get the user from the session
         User u = (User)session.getAttribute("login");
 
         if(session.getAttribute("login") != null && u.getRole_id() == 3)
         {
-            clazzService.deleteClass(classId);
+            Clazz c = clazzService.findById(classId);
 
-            log.info("Class deleted with ID: " + classId);
-            return "redirect:/admin/class";
+            model.addAttribute("item", c.getClassName());
+            model.addAttribute("returnUrl", "/admin/class");
+            model.addAttribute("deleteUrl", "/admin/delete/" + c.getClassId() + "/confirm");
+            return "confirmdeletion";
+
         }
         return "error";
     }
+
+    @GetMapping("/admin/delete/{id}/confirm")
+    public String deleteClassConfirm(@PathVariable int id)
+    {
+        clazzService.deleteClass(id);
+
+        return "deleteclasssuccess";
+    }
+
 }

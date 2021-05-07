@@ -10,7 +10,7 @@
     <div w3-include-html="../../header"></div>
     <div class="centered list full">
         <p class="title">Are you sure?</p>
-        <p th:text="${'You are about to delete ' + item}"></p>
+        <p>You are about to delete <b th:text="${item}"></b></p>
 
         <div class="horizontal">
             <a th:href="${returnUrl}" class="clickable">Return</a>
