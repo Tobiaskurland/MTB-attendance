@@ -21,7 +21,7 @@ public interface IUserRepo extends JpaRepository<User, Integer> {
 
     @Query(value = "SELECT u.userID, u.first_name, u.last_name, u.email, u.role_id, u.password FROM MTD_attend.user u " +
             "LEFT JOIN user_class uc on u.userID = uc.user_id " +
-            "WHERE uc.user_id IS NULL", nativeQuery = true)
+            "WHERE uc.user_id IS NULL and u.role_id <= 2", nativeQuery = true)
     List<User> findAllStudentsWithNoClass();
 
     @Query(value = "SELECT u.* FROM MTD_attend.user u " +
