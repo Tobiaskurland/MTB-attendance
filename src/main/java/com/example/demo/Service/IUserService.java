@@ -17,4 +17,5 @@ public interface IUserService {
     void save(User user);
     List<User> findAllStudentsWithNoClass();
     List<User> findALlStudentsWithClass(int classId);
+    void deepDeleteUser(int id);
 }

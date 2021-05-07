@@ -22,20 +22,21 @@
             </thead>
             <tbody id="userList">
                 <tr>
-                    <td><input type="text"  th:id="fname1" ></td>
-                    <td><input type="text"  th:id="lname1" ></td>
-                    <td><input type="text"  th:id="email1" ></td>
-                    <td><input type="text"  th:id="pass1" ></td>
+                    <td><input type="text"  class="fnameid" ></td>
+                    <td><input type="text"  class="lnameid" ></td>
+                    <td><input type="text"  class="emailid" ></td>
+                    <td><input type="text"  class="passid" ></td>
                     <td>
                         <select th:id="role1" value="1">
                             <option value="1">Student</option>
                             <option value="2">Teacher</option>
+                            <option value="3">Admin</option>
                         </select>
                     </td>
-                    <td><button id="addButton" class="clickable" onclick="addRow()">+</button></td>
                 </tr>
             </tbody>
         </table>
+        <button id="addButton" class="clickable" onclick="addRow()">+</button>
         <button class="clickable" th:onclick="|submitUsers(${count})|">Submit</button>
     </div>
 

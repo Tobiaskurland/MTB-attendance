@@ -9,13 +9,17 @@
 <body>
     <div w3-include-html="../../header"></div>
     <div class="centered list full">
-        <div class="checkmark">&#x2714;</div>
-        <p>Users added</p>
-        <a href="/overview" class="clickable">Return</a>
+        <p class="title">Are you sure?</p>
+        <p th:text="${'You are about to delete ' + item}"></p>
+
+        <div class="horizontal">
+            <a th:href="${returnUrl}" class="clickable">Return</a>
+            <a th:href="${deleteUrl}" class="clickable">Confirm deletion</a>
+        </div>
     </div>
 
     <script>
-        w3IncludeHTML();
+            w3IncludeHTML();
     </script>
 </body>
 </html>

@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
-    <title>Title</title>
+    <title>Admin</title>
     <script src="http://www.w3schools.com/lib/w3data.js"></script>
 </head>
 <body>
+<div>
     <div w3-include-html="../../header"></div>
-    <div class="centered list full">
-        <div class="checkmark">&#x2714;</div>
-        <p>Users added</p>
-        <a href="/overview" class="clickable">Return</a>
+    <div class="horizontal">
+        <div class="list">
+            <p>Users</p>
+            <a class="clickable" href="/users/add">new</a>
+            <a class="clickable" href="/users">View</a>
+        </div>
     </div>
-
+</div>
     <script>
         w3IncludeHTML();
     </script>
