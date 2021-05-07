@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -62,19 +62,19 @@
             z-index: 1; /* Sit on top */
             left: 0;
             top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
+            width: 100px; /* Full width */
+            height: 100px; /* Full height */
             overflow: auto; /* Enable scroll if needed */
-            background-color: #474e5d;
+            background-color: #dddddd;
             padding-top: 50px;
         }
 
         /* Modal Content/Box */
         .modal-content {
-            background-color: #fefefe;
+            background-color: #f1f1f1;
             margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
             border: 1px solid #888;
-            width: 80%; /* Could be more or less, depending on screen size */
+            width: 100px; /* Could be more or less, depending on screen size */
         }
 
         /* Style the horizontal ruler */
@@ -129,25 +129,28 @@
                     </a>
                 </div>
                 <div class="w3-half">
-                    <!--<button class="w3-button w3-block w3-red w3-section" title="Delete" onclick="document.getElementById('id01').style.display='block'">
-                        <i class="fa fa-trash"></i>
-                    </button>-->
-                    <a th:href="@{'/admin/' + ${class.classId} + '/deleteClass'}">
+                    <!--<a th:href="@{'/admin/' + ${class.classId} + '/deleteClass'}">
                         <button class="w3-button w3-block w3-red w3-section" title="Delete">
                             <i class="fa fa-trash"></i>
                         </button>
-                    </a>
+                    </a>-->
+                    <!--<button class="w3-button w3-block w3-red w3-section" title="Delete" onclick="document.getElementById('id01').style.display='inline-block'">
+                        <i class="fa fa-trash"></i>
+                    </button>-->
+
                 </div>
-                <!--<div id="id01" class="modal">
-                    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+
+                <!-- MODAL
+                <div id="id01" class="centered modal" style="width: 600px; height: 450px; margin-left: 30%; margin-top: 10%">
+                    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
                     <div class="container">
                         <h1>Delete Class</h1>
-                        <p>Are you sure you want to delete?</p>
+                        <p>Are you sure you want to delete this Class?</p>
 
                         <div class="clearfix">
-                            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                            <button type="button" class="cancelbtn">Cancel</button>
                             <a th:href="@{'/admin/' + ${class.classId} + '/deleteClass'}">
-                                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Delete</button>
+                                <button type="button" class="deletebtn">Delete</button>
                             </a>
                         </div>
                     </div>
@@ -157,21 +160,24 @@
 
     </div>
 
-    <script>
 
-        <!-- dynamic header -->
-        w3IncludeHTML();
+<script>
 
-        // Get the modal
-        //var modal = document.getElementById('id01');
+    <!-- dynamic header -->
+    w3IncludeHTML();
 
-        // When the user clicks anywhere outside of the modal, close it
-        //window.onclick = function(event) {
-            //if (event.target == modal) {
-                //modal.style.display = "none";
-            //}
+    // Get the modal
+    //var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    //window.onclick = function(event) {
+        //if (event.target == modal) {
+            //modal.style.display = "none";
         //}
-    </script>
+    //}
+
+</script>
+
 
 </body>
 </html>
