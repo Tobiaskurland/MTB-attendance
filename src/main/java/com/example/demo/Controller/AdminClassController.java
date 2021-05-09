@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class AdminClassController {
 
     //Logger
-    Logger log = Logger.getLogger(LoginController.class.getName());
+    Logger log = Logger.getLogger(AdminClassController.class.getName());
 
     @Autowired
     IClazzService clazzService;
@@ -73,6 +73,7 @@ public class AdminClassController {
                 model.addAttribute("role", u.getRole_id());
                 model.addAttribute("educations", educationService.findAll());
             }
+
             return "addClass";
         }
         return "error";
@@ -86,6 +87,8 @@ public class AdminClassController {
 
         if(session.getAttribute("login") != null && u.getRole_id() == 3) {
             clazzService.save(clazz);
+
+            log.info("AddClass methdod called");
 
             return "redirect:/admin/addClass/success";
         }

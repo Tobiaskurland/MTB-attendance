@@ -35,6 +35,7 @@
                 <a class="clickable" th:href="${statsUrl}">Statistics</a>
                 <a th:if="${role > 2}" class="clickable" href="/users/add" >Add Users</a>
                 <a th:if="${role > 2}" class="clickable" href="/admin/class" >Manage Classes</a>
+                <a th:if="${role > 1}" class="clickable" href="/class/statistics" >Class Statistics</a>
             </div>
         </div>
 

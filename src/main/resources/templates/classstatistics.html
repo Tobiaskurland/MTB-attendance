@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Class Statistics</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Dynamic header -->
+    <script src="http://www.w3schools.com/lib/w3data.js"></script>
+</head>
+
+<style>
+    .float-container {
+        border: 3px solid #fff;
+        padding: 20px;
+    }
+
+    .float-child {
+        width: 15%;
+        float: left;
+        padding-right: 6%;
+    }
+    .dropdown{
+        width: 150%;
+    }
+</style>
+
+<body>
+
+<!-- dynamic header -->
+<div w3-include-html="../../header"></div>
+
+<div style="margin-left: 20px">
+    <br><br><br><br>
+
+    <div th:if="${user.role_id} >= 2">
+        <form th:action="@{'/class/statistics/result'}" method="get">
+            <select th:name="class" class="btn btn-secondary dropdown-toggle dropdown-option" required>
+                <option value="" selected disabled hidden>Select class</option>
+                <option th:each="c: ${class}" th:text="${c.className}" th:value="${c.classId}" th:selected="(${c.classId} == *{class})"></option>
+            </select>
+
+            <button type="submit" class="w3-button w3-black">Search</button>
+        </form>
+    </div>
+
+    <!--<br><br><br>
+    <h4 th:text="${'Attendance up to and including today:.......' + percent + '%'}"></h4>
+    <h4 th:text="${'Absence for whole period:...........................' + absencePercent + '%'}"></h4>
+    <h4 th:text="${'Attended modules:........................................' + attendedLectures}"></h4>
+    <br><br><br>
+    <div class="w3-col m7">
+        <table class="table table-bordered table-striped" style="width: 165%">
+
+            <thead>
+            <tr>
+                <th style="width: 18%">Course Name</th>
+                <th style="width: 12%">Lecture Name</th>
+                <th style="width: 10%">Date</th>
+                <th style="width: 10%">First module</th>
+                <th style="width: 10%">Second module</th>
+                <th style="width: 10%">Third module</th>
+                <th style="width: 10%">Fourth module</th>
+                <th style="width: 10%">Fifth module</th>
+                <th style="width: 10%">Sixth module</th>
+
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="ao : ${attendanceOverview}">
+
+                <td th:text="${ao.course_name}"></td>
+                <td th:text="${ao.lecture_name}"></td>
+                <td th:text="${ao.date}"></td>
+
+                <td th:if="${ao.first} == null" style="background-color: #888888"></td>
+                <td th:if="${ao.lecture_status} == 'pending' and ${ao.first} != null" th:text="${ao.lecture_status}"></td>
+                <td th:if="${ao.first} == 'attended'" style="background-color: chartreuse" th:text="${ao.first}"></td>
+                <td th:if="${ao.first} == 'not attended' and ${ao.lecture_status} == 'done'" style="background-color: red" th:text="${ao.first}"></td>
+
+                <td th:if="${ao.second} == null" style="background-color: #888888"></td>
+                <td th:if="${ao.lecture_status} == 'pending' and ${ao.second} != null" th:text="${ao.lecture_status}"></td>
+                <td th:if="${ao.second} == 'attended'" style="background-color: chartreuse" th:text="${ao.second}"></td>
+                <td th:if="${ao.second} == 'not attended' and ${ao.lecture_status} == 'done'" style="background-color: red" th:text="${ao.second}"></td>
+
+                <td th:if="${ao.third} == null" style="background-color: #888888"></td>
+                <td th:if="${ao.lecture_status} == 'pending' and ${ao.third} != null" th:text="${ao.lecture_status}"></td>
+                <td th:if="${ao.third} == 'attended'" style="background-color: chartreuse" th:text="${ao.third}"></td>
+                <td th:if="${ao.third} == 'not attended' and ${ao.lecture_status} == 'done'" style="background-color: red" th:text="${ao.third}"></td>
+
+                <td th:if="${ao.fourth} == null" style="background-color: #888888"></td>
+                <td th:if="${ao.lecture_status} == 'pending' and ${ao.fourth} != null" th:text="${ao.lecture_status}"></td>
+                <td th:if="${ao.fourth} == 'attended'" style="background-color: chartreuse" th:text="${ao.fourth}"></td>
+                <td th:if="${ao.fourth} == 'not attended' and ${ao.lecture_status} == 'done'" style="background-color: red" th:text="${ao.fourth}"></td>
+
+                <td th:if="${ao.fifth} == null" style="background-color: #888888"></td>
+                <td th:if="${ao.lecture_status} == 'pending' and ${ao.fifth} != null" th:text="${ao.lecture_status}"></td>
+                <td th:if="${ao.fifth} == 'attended'" style="background-color: chartreuse" th:text="${ao.fifth}"></td>
+                <td th:if="${ao.fifth} == 'not attended' and ${ao.lecture_status} == 'done'" style="background-color: red" th:text="${ao.fifth}"></td>
+
+                <td th:if="${ao.sixth} == null" style="background-color: #888888"></td>
+                <td th:if="${ao.lecture_status} == 'pending' and ${ao.sixth} != null" th:text="${ao.lecture_status}"></td>
+                <td th:if="${ao.sixth} == 'attended'" style="background-color: chartreuse" th:text="${ao.sixth}"></td>
+                <td th:if="${ao.sixth} == 'not attended' and ${ao.lecture_status} == 'done'" style="background-color: red" th:text="${ao.sixth}"></td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>-->
+
+</div>
+
+
+<script>
+
+    <!-- dynamic header -->
+    w3IncludeHTML();
+</script>
+</body>
+</html>
