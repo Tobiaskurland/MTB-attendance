@@ -26,4 +26,5 @@ public interface IClazzRepo extends JpaRepository<Clazz, Integer> {
             "where uc.user_id = ?1 and cc.course_id = ?2", nativeQuery = true)
     List<Clazz> findClassesByUserAndCourse(int user_id, int course_id);
 
+
 }
