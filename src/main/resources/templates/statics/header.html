@@ -16,14 +16,14 @@
 <body>
 
 <div class="topbar centered" >
-    <a href="/overview" class="fa fa-home" style=" position: relative;right: 30%;color: white;margin-top: -10px;text-decoration: none;"></a>
+    <a th:href="@{/overview}" class="fa fa-home" style=" position: relative;right: 30%;color: white;margin-top: -10px;text-decoration: none;"></a>
     <p style="margin-top: 10px;">MTD Attend</p>
 
     <div class="w3-dropdown-hover w3-hide-small" style="  position: relative;left: 30%;margin-top: -10px;">
         <a class="w3-padding-large "><i class="fa fa-bars"></i></a>
         <div class="w3-dropdown-content w3-bar-block w3-card-4" style="font-size: 15px">
-            <a th:if="${user.role_id == 1}" href="/student/statistics" class="w3-bar-item w3-button" style="text-decoration:none">Statistics</a>
-            <a th:if="${user.role_id > 1}" href="/teacher/statistics" class="w3-bar-item w3-button" style="text-decoration:none">Statistics</a>
+            <a th:if="${user.role_id == 1}" th:href="@{/student/statistics}" class="w3-bar-item w3-button" style="text-decoration:none">Statistics</a>
+            <a th:if="${user.role_id > 1}" th:href="@{/teacher/statistics}" class="w3-bar-item w3-button" style="text-decoration:none">Statistics</a>
             <a><form th:action="@{/logout}" method="get" class="w3-bar-item w3-button" style="position: relative;right: 10px">
                 <input class="w3-bar-item w3-button" type="submit" value="Log out" style="padding: 0px;">
             </form></a>

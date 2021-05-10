@@ -8,12 +8,12 @@
 </head>
 <body>
 <div>
-    <div w3-include-html="../../header"></div>
+    <div w3-include-html="../../kea/header"></div>
     <div class="horizontal">
         <div class="list">
             <p>Users</p>
-            <a class="clickable" href="/users/add">new</a>
-            <a class="clickable" href="/users">View</a>
+            <a class="clickable" th:href="@{/users/add}">new</a>
+            <a class="clickable" th:href="@{/users}">View</a>
         </div>
     </div>
 </div>
