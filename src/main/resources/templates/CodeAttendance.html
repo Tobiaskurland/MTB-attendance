@@ -9,7 +9,7 @@
 </head>
 <body>
 <div>
-    <div w3-include-html="../../../header"></div>
+    <div w3-include-html="../../../kea/header"></div>
 
     <div class="centered title" th:text="${'Lecture ' + time_interval + ' for day ' + date}">Lectures</div>
 
@@ -18,7 +18,7 @@
         <!-- TEACHER -->
         <div th:if="${role == 2}" >
             <div th:if="${generatedCode == null}">
-                <a class="modal-content" th:href="${'/GenerateCode/'} + ${lectureid}">
+                <a class="modal-content" th:href="@{'/' + ${GenerateCode} + '/' + ${lectureid}}">
                     <button type="submit" class="w3-right w3-green button">Generate Code</button>
                 </a>
             </div>
