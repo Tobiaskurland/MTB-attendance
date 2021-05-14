@@ -42,4 +42,17 @@ public class AttendanceServiceImpl implements IAttendanceService {
     public Attendance alreadyAttended(int userId, int lectureId) {
         return attendanceRepo.alreadyAttended(userId, lectureId);
     }
+
+    @Override
+    public List<Attendance> findAllAttendanceOnClass(int classId) {
+        return attendanceRepo.findAllAttendanceOnClass(classId);
+    }
+
+    @Override
+    public double calculateAttendanceOnClass(int passedLectures, int studentsInClass, int attendanceInClass) {
+
+        double allStudentsWithLecture = (studentsInClass * passedLectures);
+
+        return (attendanceInClass * 100 / allStudentsWithLecture);
+    }
 }

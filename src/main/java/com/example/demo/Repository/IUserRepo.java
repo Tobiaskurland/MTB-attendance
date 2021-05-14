@@ -36,4 +36,5 @@ public interface IUserRepo extends JpaRepository<User, Integer> {
     @Modifying
     @Query(value = "call delete_user(?1)", nativeQuery = true)
     public int deepDeleteUser(int id);
+
 }

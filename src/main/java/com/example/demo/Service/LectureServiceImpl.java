@@ -106,6 +106,8 @@ public class LectureServiceImpl implements ILectureService{
         return lectureRepo.findLecturesByCourseIdForDaterange(id, user_id, startDate, endDate);
     }
 
-
-
+    @Override
+    public List<Lecture> findAllPassedLectures(int classId) {
+        return lectureRepo.findAllPassedLectures(classId);
+    }
 }

@@ -14,4 +14,7 @@ public interface IAttendanceService {
     void deleteById(int id);
     void save(Attendance attendanceEntity);
     Attendance alreadyAttended(int userId, int lectureId);
+    List<Attendance> findAllAttendanceOnClass(int classId);
+    double calculateAttendanceOnClass(int passedLectures, int studentsInClass, int attendanceInClass);
+
 }

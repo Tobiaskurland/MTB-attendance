@@ -43,4 +43,9 @@ public interface ILectureRepo extends JpaRepository<Lecture, Integer> {
     @Query(value = "select * from lecture where lectureID = ?1 and verification_code = ?2 and code_expire > NOW()", nativeQuery = true)
     Lecture matchingCodes(int id, String enteredCode);
 
+    @Query(value = "SELECT * FROM lecture WHERE course_class_id IN ( " +
+            "SELECT idcourse_class FROM course_class WHERE class_id = (SELECT classID FROM Class WHERE classID = ?1) " +
+            ") AND `date` < NOW()", nativeQuery = true)
+    List<Lecture> findAllPassedLectures(int classId);
+
 }

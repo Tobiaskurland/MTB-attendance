@@ -41,7 +41,7 @@
     <div th:if="${user.role_id} >= 2">
         <form th:action="@{'/class/statistics/result'}" method="get">
             <select th:name="class" class="btn btn-secondary dropdown-toggle dropdown-option" required>
-                <option value="" selected disabled hidden>Select class</option>
+                <option th:if="${class} != 0" value="" selected disabled hidden>Select class</option>
                 <option th:each="c: ${class}" th:text="${c.className}" th:value="${c.classId}" th:selected="(${c.classId} == *{class})"></option>
             </select>
 
@@ -49,12 +49,12 @@
         </form>
     </div>
 
-    <!--<br><br><br>
-    <h4 th:text="${'Attendance up to and including today:.......' + percent + '%'}"></h4>
-    <h4 th:text="${'Absence for whole period:...........................' + absencePercent + '%'}"></h4>
-    <h4 th:text="${'Attended modules:........................................' + attendedLectures}"></h4>
     <br><br><br>
-    <div class="w3-col m7">
+    <h4 th:text="${'Attendance up to and including today:.......' + #numbers.formatDecimal(attendance, 0, 2) + '%'}"></h4>
+    <h4 th:text="${'Lectures finished:........................................' + lectures}"></h4>
+    <h4 th:text="${'Students in class:........................................' + studentsInClass}"></h4>
+    <br><br><br>
+    <!--<div class="w3-col m7">
         <table class="table table-bordered table-striped" style="width: 165%">
 
             <thead>
