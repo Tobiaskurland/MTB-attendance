@@ -18,23 +18,23 @@
         <div class="horizontal">
             <div class="list overviewspacing">
                 <div class="centered title">Your courses</div>
-                <a th:each="course : ${courses}" class="clickable wide spacing centered" th:href="${'/course/' + course.getCourseId() + '?weeknumber=' + week + '&year=' + year}" th:text="${course.getCourseName()}"></a>
+                <a th:each="course : ${courses}" class="clickable wide spacing centered" th:href="@{${'/course/' + course.getCourseId() + '?weeknumber=' + week + '&year=' + year}}" th:text="${course.getCourseName()}"></a>
             </div>
             <div class="overviewspacing">
                 <div class="centered title">Todays lectures</div>
                 <div class="lecture" th:each="lecture : ${lectures}">
                     <a class="clickable spacing centered"
                        th:if="${lecture != null}"
-                       th:href="${role != 1} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}"
+                       th:href="@{${role != 1} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}}"
                        th:text="${lecture.getLectureName()}">
                     </a>
                 </div>
                 <div class="lecture"></div>
             </div>
             <div class="centered fill">
-                <a class="clickable" th:href="${statsUrl}">Statistics</a>
-                <a th:if="${role > 2}" class="clickable" href="/users/add" >Add Users</a>
-                <a th:if="${role > 2}" class="clickable" href="/admin/class" >Manage Classes</a>
+                <a class="clickable" th:href="@{${statsUrl}}">Statistics</a>
+                <a th:if="${role > 2}" class="clickable" th:href="@{/users/add}" >Add Users</a>
+                <a th:if="${role > 2}" class="clickable" th:href="@{/admin/class}" >Manage Classes</a>
             </div>
         </div>
 

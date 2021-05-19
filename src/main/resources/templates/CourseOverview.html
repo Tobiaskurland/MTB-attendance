@@ -29,7 +29,7 @@
                     <div class="lecture" th:each="lecture : ${monday}">
                         <a class="clickable spacing centered"
                            th:if="${lecture != null}"
-                           th:href="${role == 2} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}"
+                           th:href="@{${role == 2} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}}"
                            th:text="${lecture.getLectureName()}">
                         </a>
                     </div>
@@ -40,7 +40,7 @@
                     <div class="lecture" th:each="lecture : ${tuesday}">
                         <a class="clickable spacing centered"
                            th:if="${lecture != null}"
-                           th:href="${role == 2} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}"
+                           th:href="@{${role == 2} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}}"
                            th:text="${lecture.getLectureName()}">
                         </a>
                     </div>
@@ -51,7 +51,7 @@
                     <div class="lecture" th:each="lecture : ${wednesday}">
                         <a class="clickable spacing centered"
                            th:if="${lecture != null}"
-                           th:href="${role == 2} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}"
+                           th:href="@{${role == 2} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}}"
                            th:text="${lecture.getLectureName()}">
                         </a>
                     </div>
@@ -62,7 +62,7 @@
                     <div class="lecture" th:each="lecture : ${thursday}">
                         <a class="clickable spacing centered"
                            th:if="${lecture != null}"
-                           th:href="${role == 2} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}"
+                           th:href="@{${role == 2} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}}"
                            th:text="${lecture.getLectureName()}">
                         </a>
                     </div>
@@ -73,7 +73,7 @@
                     <div class="lecture" th:each="lecture : ${friday}">
                         <a class="clickable spacing centered"
                            th:if="${lecture != null}"
-                           th:href="${role == 2} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}"
+                           th:href="@{${role == 2} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}}"
                            th:text="${lecture.getLectureName()}">
                         </a>
                     </div>
@@ -84,7 +84,7 @@
                     <div class="lecture" th:each="lecture : ${saturday}">
                         <a class="clickable spacing centered"
                            th:if="${lecture != null}"
-                           th:href="${role == 2} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}"
+                           th:href="@{${role == 2} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}}"
                            th:text="${lecture.getLectureName()}">
                         </a>
                     </div>
@@ -95,7 +95,7 @@
                     <div class="lecture" th:each="lecture : ${sunday}">
                         <a class="clickable spacing centered"
                            th:if="${lecture != null}"
-                           th:href="${role == 2} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}"
+                           th:href="@{${role == 2} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}}"
                            th:text="${lecture.getLectureName()}">
                         </a>
                     </div>
