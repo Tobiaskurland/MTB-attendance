@@ -45,12 +45,14 @@ function submitUsers()
     }
 
     let request = new XMLHttpRequest();
-    request.open("POST", "/users/submit");
+    let prefix = "/" + window.location.pathname.split("/")[1];
+
+    request.open("POST", prefix + "/users/submit");
     request.onreadystatechange = function()
     {
         if(request.readyState == 4 && request.status >= 200 && request.status < 400)
         {
-            window.location ="/users/add/success";
+            window.location = prefix + "/users/add/success";
         }
     }
     request.setRequestHeader("Content-Type", "application/json;charset=UTF8");
