@@ -36,10 +36,10 @@ public class LoginController {
     }
     @CrossOrigin()
     @PostMapping("/login")
-    public String login(@RequestParam String firstName, @RequestParam String password, HttpSession session, Model model) {
+    public String login(@RequestParam String email, @RequestParam String password, HttpSession session, Model model) {
 
         //See if the user consist in the database
-        User user = loginService.findLogin(firstName, password);
+        User user = loginService.findLogin(email, password);
 
         //If the user doesn't exist, redirect to login page
         if (user == null){
@@ -75,23 +75,6 @@ public class LoginController {
         log.info("session terminated");
 
         return "/login";
-    }
-
-    // SIGN UP
-    @CrossOrigin()
-    @GetMapping("/signup")
-    public String signup(){
-        return "signup";
-    }
-
-    @CrossOrigin()
-    @PostMapping("/signup")
-    public String signup(@ModelAttribute User user, HttpSession session, Model model) throws JSONException {
-
-        //Add the user to the database
-        signupService.signup(user);
-
-        return "redirect:/";
     }
 
     //TEMP HOME

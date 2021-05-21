@@ -78,8 +78,8 @@
     </div>
 
     <div class="container">
-        <label ><b>First Name</b></label>
-        <input type="text" placeholder="Enter First name" th:name="firstName" required>
+        <label ><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" th:name="email" required>
 
         <label><b>Password</b></label>
         <input type="password" id="pwd" placeholder="Enter Password" th:name="password" required>
@@ -89,8 +89,6 @@
     </div>
 
 </form>
-
-<a th:href="@{/signup}" >Sign up</a>
 
 <div th:if="${error}" class="alert alert-danger alert-dismissible">
     <strong>Login Error!</strong> Wrong username or password!

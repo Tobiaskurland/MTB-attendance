@@ -17,8 +17,8 @@ public class LoginRepoImpl implements LoginRepo{
     JdbcTemplate jdbc;
 
     @Override
-    public User findLogin(String firstName, String password) {
-        String sql = "SELECT userID, first_name, last_name, email, role_id FROM `user` WHERE first_name = ? AND password = ?";
+    public User findLogin(String email, String password) {
+        String sql = "SELECT userID, first_name, last_name, email, role_id FROM `user` WHERE email = ? AND password = ?";
         User u = this.jdbc.query(sql, resultSet -> {
             User user = new User();
             while (resultSet.next()){
@@ -31,7 +31,7 @@ public class LoginRepoImpl implements LoginRepo{
                 return user;
             }
             return null;
-        }, firstName, password);
+        }, email, password);
         return u;
     }
 }

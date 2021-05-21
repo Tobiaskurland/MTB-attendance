@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface LoginService {
-    User findLogin(String firstName, String password);
+    User findLogin(String email, String password);
 }
