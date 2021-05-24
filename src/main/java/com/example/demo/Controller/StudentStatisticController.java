@@ -49,6 +49,7 @@ public class StudentStatisticController {
         User u = (User)session.getAttribute("login");
         int userId = u.getUserId();
         User theUser = userService.findById(userId);
+
         model.addAttribute("user", theUser);
         model.addAttribute("percent", 0.0);
         model.addAttribute("absencePercent", 0.0);
