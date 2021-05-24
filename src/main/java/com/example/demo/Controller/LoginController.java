@@ -74,7 +74,7 @@ public class LoginController {
 
         log.info("session terminated");
 
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     // SIGN UP

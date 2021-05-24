@@ -45,7 +45,7 @@ class LoginControllerTest
                 .andExpect(MockMvcResultMatchers.redirectedUrl("/"));
 
         mvc.perform(MockMvcRequestBuilders.post("/login?firstName=userthatexists&password=1234"))
-                .andExpect(MockMvcResultMatchers.redirectedUrl("/overview"));
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/KKoverview"));
 
         mvc.perform(MockMvcRequestBuilders.post("/login"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
