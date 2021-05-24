@@ -45,6 +45,7 @@ public class AdminClassController {
             if(u.getRole_id() > 2) {
 
                 //All classes
+                model.addAttribute("user", u);
                 model.addAttribute("classes", clazzService.findAll());
                 model.addAttribute("role", u.getRole_id());
             }
@@ -67,6 +68,7 @@ public class AdminClassController {
             if(u.getRole_id() > 2) {
 
                 //All classes
+                model.addAttribute("user", u);
                 model.addAttribute("classes", clazzService.findAll());
                 model.addAttribute("role", u.getRole_id());
                 model.addAttribute("educations", educationService.findAll());
@@ -91,13 +93,14 @@ public class AdminClassController {
     }
 
     @GetMapping("/admin/addClass/success")
-    public String addClassSuccess(HttpSession session) {
+    public String addClassSuccess(HttpSession session, Model model) {
 
         //Get the user from the session
         User u = (User)session.getAttribute("login");
 
         if(session.getAttribute("login") != null && u.getRole_id() == 3)
         {
+            model.addAttribute("user", u);
             return "addclasssuccess";
         }
         return "error";
@@ -112,6 +115,7 @@ public class AdminClassController {
 
         if(session.getAttribute("login") != null && u.getRole_id() == 3)
         {
+            model.addAttribute("user", u);
             model.addAttribute("classId", classId);
             model.addAttribute("students", userService.findAllStudentsWithNoClass());
             model.addAttribute("studentswithclass", userService.findALlStudentsWithClass(classId));

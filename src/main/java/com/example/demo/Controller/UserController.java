@@ -23,6 +23,7 @@ public class UserController
 
         if(u != null && u.getRole_id() > 1)
         {
+            model.addAttribute("user",  u);
             return "addusers";
         }
         return "redirect:/overview";
@@ -44,15 +45,25 @@ public class UserController
     }
 
     @GetMapping("/users/add/success")
-    public String addUsersSuccess()
+    public String addUsersSuccess(HttpSession session, Model model)
     {
-        return "adduserssuccess";
+        User u = getLoggedInUser(session);
+
+        if(u != null && u.getRole_id() > 1)
+        {
+            model.addAttribute("user",  u);
+            return "adduserssuccess";
+        }
+        return "redirect:/overview";
     }
 
     @GetMapping("/users")
-    public String getUsers(Model model)
+    public String getUsers(Model model, HttpSession session)
     {
+        User u = getLoggedInUser(session);
+
         List<User> users = userService.findAll();
+        model.addAttribute("user", u);
         model.addAttribute("users", users);
 
         return "viewusers";
@@ -98,6 +109,7 @@ public class UserController
     {
         User u = userService.findById(id);
 
+        model.addAttribute("user",  u);
         model.addAttribute("item", u.getFirstName() + " " + u.getLastName());
         model.addAttribute("returnUrl", "/users");
         model.addAttribute("deleteUrl", "/users/delete/" + u.getUserId() + "/confirm");
@@ -105,11 +117,21 @@ public class UserController
     }
 
     @GetMapping("/users/delete/{id}/confirm")
-    public String deleteUser(@PathVariable int id)
+    public String deleteUser(@PathVariable int id, HttpSession session, Model model)
     {
-        userService.deepDeleteUser(id);
 
-        return "deleteusersuccess";
+        User u = getLoggedInUser(session);
+
+        if(u != null && u.getRole_id() > 1)
+        {
+            userService.deepDeleteUser(id);
+
+            model.addAttribute("user",  u);
+
+            return "deleteusersuccess";
+        }
+        return "redirect:/overview";
+
     }
 
     private User getLoggedInUser(HttpSession session)

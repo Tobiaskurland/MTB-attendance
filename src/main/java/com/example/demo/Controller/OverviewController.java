@@ -58,6 +58,7 @@ public class OverviewController
             List<Lecture> saturdayList = lecturesForDate(lectures, monday.plusDays(5));
             List<Lecture> sundayList = lecturesForDate(lectures, monday.plusDays(6));
 
+            model.addAttribute("user", user);
             model.addAttribute("monday", mondayList);
             model.addAttribute("tuesday", tuesdayList);
             model.addAttribute("wednesday", wednesdayList);
@@ -101,6 +102,7 @@ public class OverviewController
                     statsUrl = "/teacher/statistics";
                 }
 
+                model.addAttribute("user", user);
                 model.addAttribute("role", user.getRole_id());
                 model.addAttribute("courses", courses);
                 model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
@@ -112,6 +114,7 @@ public class OverviewController
             }
             else
             {
+                model.addAttribute("user", user);
                 return "admin";
             }
         }
