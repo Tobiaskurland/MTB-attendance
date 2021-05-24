@@ -13,14 +13,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<div>
-    <div th:insert="statics/header :: header"></div>
+<div th:insert="statics/header :: header"></div>
+<div style="margin-left: 20px">
     <!-- <div w3-include-html="../../kea/header"></div> -->
     <div class="horizontal">
         <div class="list">
             <p>Users</p>
             <a class="clickable" th:href="@{/users/add}">new</a>
             <a class="clickable" th:href="@{/users}">View</a>
+        </div>
+
+    <br><br>
+        <div class="list">
+            <p>Class</p>
+            <a class="clickable" th:href="@{/admin/addClass}">new</a>
+            <a class="clickable" th:href="@{/admin/class}">View</a>
         </div>
     </div>
 </div>
