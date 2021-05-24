@@ -2,8 +2,13 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" >
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Overview</title>
 
     <script src="http://www.w3schools.com/lib/w3data.js"></script>
@@ -13,28 +18,29 @@
 <body>
 
     <div>
-        <div w3-include-html="../../../../../kea/header"></div>
+        <div th:insert="statics/header :: header"></div>
+        <!-- <div w3-include-html="../../../../../kea/header"></div> -->
         <!--- <div class="topbar centered" th:text="${'Hello ' + username}"></div> -->
         <div class="horizontal">
             <div class="list overviewspacing">
                 <div class="centered title">Your courses</div>
-                <a th:each="course : ${courses}" class="clickable wide spacing centered" th:href="@{${'/course/' + course.getCourseId() + '?weeknumber=' + week + '&year=' + year}}" th:text="${course.getCourseName()}"></a>
+                <a th:each="course : ${courses}" class="clickable wide spacing centered" th:href="@{'/course/' + ${course.getCourseId()} + '?weeknumber=' + ${week} + '&year=' + ${year}}" th:text="${course.getCourseName()}"></a>
             </div>
             <div class="overviewspacing">
                 <div class="centered title">Todays lectures</div>
                 <div class="lecture" th:each="lecture : ${lectures}">
                     <a class="clickable spacing centered"
                        th:if="${lecture != null}"
-                       th:href="@{${role != 1} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}}"
+                       th:href="${role != 1} ? ${'/lecture/' + lecture.getLectureId() + '/attendance/createcode'} : ${'/lecture/' + lecture.getLectureId() + '/attendance'}"
                        th:text="${lecture.getLectureName()}">
                     </a>
                 </div>
                 <div class="lecture"></div>
             </div>
             <div class="centered fill">
-                <a class="clickable" th:href="@{${statsUrl}}">Statistics</a>
-                <a th:if="${role > 2}" class="clickable" th:href="@{/users/add}" >Add Users</a>
-                <a th:if="${role > 2}" class="clickable" th:href="@{/admin/class}" >Manage Classes</a>
+                <a class="clickable" th:href="${statsUrl}">Statistics</a>
+                <a th:if="${role > 2}" class="clickable" href="/users/add" >Add Users</a>
+                <a th:if="${role > 2}" class="clickable" href="/admin/class" >Manage Classes</a>
             </div>
         </div>
 

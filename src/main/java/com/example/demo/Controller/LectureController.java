@@ -42,6 +42,7 @@ public class LectureController {
             return "redirect:/overview";
         }
 
+        model.addAttribute("user", u);
         model.addAttribute("classes", clazzService.findClassByUserAndCourse(u.getUserId(), courseId));
         model.addAttribute("course", courseService.findById(courseId));
 

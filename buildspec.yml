@@ -1,0 +1,27 @@
+--- 
+artifacts: 
+  files: imagedefinitions.json
+phases: 
+  build: 
+    commands: 
+      - "echo Build started on `date`"
+      - "echo Running maven install"
+      - "mvn install"
+      - "echo building docker image"
+      - "docker build -t mtd-attend-kea ."
+      - "echo Tagging docker image"
+      - "docker tag mtd-attend-kea:latest 966879952819.dkr.ecr.eu-west-1.amazonaws.com/mtd-attend-kea:latest"
+  post_build: 
+    commands: 
+      - "echo Build completed on `date`"
+      - "echo pushing docker image"
+      - "docker push 966879952819.dkr.ecr.eu-west-1.amazonaws.com/mtd-attend-kea:latest"
+      - "echo writing image definitions files"
+      - "printf '[{\"name\":\"mtd-attend-kea-container\", \"imageUri\":\"966879952819.dkr.ecr.eu-west-1.amazonaws.com/mtd-attend-kea:latest\"}]' > imagedefinitions.json"
+      - "cat imagedefinitions.json"
+  pre_build: 
+    commands: 
+      - "echo Logging in to amazon ECR..."
+      - "aws --version"
+      - "$(aws ecr get-login --no-include-email --region eu-west-1)"
+version: 0.2

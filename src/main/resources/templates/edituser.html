@@ -5,10 +5,17 @@
     <title>Edit user</title>
     <script src="http://www.w3schools.com/lib/w3data.js"></script>
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" >
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <div>
-    <div w3-include-html="../../kea/header"></div>
+    <div th:insert="statics/header :: header"></div>
+    <!-- <div w3-include-html="../../kea/header"></div> -->
     <div class="centered">
         <form class="list form" method="post">
             <label for="fname">First name:</label>

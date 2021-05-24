@@ -74,7 +74,7 @@ public class LoginController {
 
         log.info("session terminated");
 
-        return "/login";
+        return "redirect:/";
     }
 
     //TEMP HOME
