@@ -21,7 +21,7 @@ target/
 
 *.properties
 .properties
-*.application.properties
+local.properties
 
 ### NetBeans ###
 /nbproject/private/
