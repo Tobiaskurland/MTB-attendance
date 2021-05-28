@@ -119,6 +119,7 @@ public class CodeController {
             }
 
             //Data we need on the HTML
+            model.addAttribute("user", u);
             model.addAttribute("role", u.getRole_id());
             model.addAttribute("l", l);
             model.addAttribute("date", l.getDate());
@@ -216,6 +217,7 @@ public class CodeController {
             Lecture l = lectureService.findById(id);
 
             //Data we need on the HTML
+            model.addAttribute("user", u);
             model.addAttribute("l", l.getLectureName());
 
             return "success";
@@ -237,6 +239,7 @@ public class CodeController {
             Lecture l = lectureService.findById(id);
 
             //Data we need on the HTML
+            model.addAttribute("user", u);
             model.addAttribute("l", l.getLectureName());
             model.addAttribute("lectureid", id);
 

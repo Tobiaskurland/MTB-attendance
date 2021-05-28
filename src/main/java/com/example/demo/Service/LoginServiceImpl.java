@@ -12,7 +12,7 @@ public class LoginServiceImpl implements LoginService{
     LoginRepo loginRepo;
 
     @Override
-    public User findLogin(String firstName, String password) {
-        return loginRepo.findLogin(firstName, password);
+    public User findLogin(String email, String password) {
+        return loginRepo.findLogin(email, password);
     }
 }
