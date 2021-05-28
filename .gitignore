@@ -19,9 +19,9 @@ target/
 *.iml
 *.ipr
 
-#*.properties
-#.properties
-#.application.properties
+*.properties
+.properties
+.application.properties
 local.properties
 project.properties
 
