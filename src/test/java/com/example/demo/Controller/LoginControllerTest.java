@@ -41,10 +41,10 @@ class LoginControllerTest
     @Test
     void login() throws Exception
     {
-        mvc.perform(MockMvcRequestBuilders.post("/login?firstName=hacker&password=hackthemainframe"))
+        mvc.perform(MockMvcRequestBuilders.post("/login?email=hacker&password=hackthemainframe"))
                 .andExpect(MockMvcResultMatchers.redirectedUrl("/"));
 
-        mvc.perform(MockMvcRequestBuilders.post("/login?firstName=userthatexists&password=1234"))
+        mvc.perform(MockMvcRequestBuilders.post("/login?email=userthatexists&password=1234"))
                 .andExpect(MockMvcResultMatchers.redirectedUrl("/overview"));
 
         mvc.perform(MockMvcRequestBuilders.post("/login"))
