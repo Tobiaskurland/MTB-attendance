@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @ExtendWith(SpringExtension.class)
@@ -44,6 +45,8 @@ class UserControllerTest
         user.setRole_id(2);
         session = new HashMap<>();
         session.put("login", user);
+
+        when(userService.findById(1)).thenReturn(user);
     }
 
     @Test
@@ -89,5 +92,50 @@ class UserControllerTest
         .contentType(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(null)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @Test
+    void userAddSuccess() throws Exception
+    {
+        //not logged in
+        mvc.perform((MockMvcRequestBuilders.get("/users/add/success")))
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/overview"));
+
+        //logged in
+        mvc.perform(MockMvcRequestBuilders.get("/users/add/success")
+                .sessionAttrs(session))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void getUsers() throws Exception
+    {
+        mvc.perform(MockMvcRequestBuilders.get("/users")
+                .sessionAttrs(session))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        mvc.perform(MockMvcRequestBuilders.get("/users/edit/1")
+                .sessionAttrs(session))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void postUsers() throws Exception
+    {
+        mvc.perform(MockMvcRequestBuilders.post("/users/edit/1?id=1&fname=bob&lname=marley&email=e@mail.com&role=1")
+        .sessionAttrs(session))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void deleteUser() throws Exception
+    {
+        mvc.perform(MockMvcRequestBuilders.get("/users/delete/1")
+        .sessionAttrs(session))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        mvc.perform(MockMvcRequestBuilders.get("/users/delete/1/confirm")
+        .sessionAttrs(session))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 }

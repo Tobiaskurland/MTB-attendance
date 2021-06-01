@@ -27,9 +27,6 @@ public class LectureController {
     @Autowired
     ILectureService lectureService;
 
-    @Autowired
-    ICourseRepo courseRepo;
-
     @GetMapping("/course/{courseId}/addLecture")
     public String addLecture(Model model, HttpSession session, @PathVariable int courseId){
 

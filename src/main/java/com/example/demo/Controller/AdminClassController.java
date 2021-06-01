@@ -133,7 +133,7 @@ public class AdminClassController {
     }
 
     @PostMapping("/admin/{classId}/updateClass")
-    public String UpdateClass(@PathVariable int classId, HttpSession session, @ModelAttribute ClazzViewModel updatedClazz){
+    public String UpdateClass(@PathVariable int classId, HttpSession session, @ModelAttribute("updatedClazz") ClazzViewModel updatedClazz){
 
         //Get the user from the session
         User u = (User)session.getAttribute("login");

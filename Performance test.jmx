@@ -53,6 +53,13 @@
             <stringProp name="60">60</stringProp>
             <stringProp name="10">10</stringProp>
           </collectionProp>
+          <collectionProp name="-1811392887">
+            <stringProp name="100">100</stringProp>
+            <stringProp name="1789">85</stringProp>
+            <stringProp name="30">30</stringProp>
+            <stringProp name="1598">20</stringProp>
+            <stringProp name="10">10</stringProp>
+          </collectionProp>
         </collectionProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
@@ -191,7 +198,7 @@
             <stringProp name="HTTPSampler.port"></stringProp>
             <stringProp name="HTTPSampler.protocol"></stringProp>
             <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">/${school}/login?firstName=Dennis&amp;password=teacher</stringProp>
+            <stringProp name="HTTPSampler.path">/${school}/login?email=Deni1234@kea.dk&amp;password=teacher</stringProp>
             <stringProp name="HTTPSampler.method">POST</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
