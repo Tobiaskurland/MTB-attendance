@@ -3,6 +3,7 @@ package com.example.demo.Controller;
 import com.example.demo.Model.User;
 import com.example.demo.Service.ICourseService;
 import com.example.demo.Service.ILectureService;
+import com.example.demo.Service.IUserClassService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,6 +30,9 @@ class OverviewControllerTest
 
     @MockBean
     private ILectureService lectureService;
+
+    @MockBean
+    private IUserClassService userClassService;
 
     @Autowired
     private MockMvc mvc;
