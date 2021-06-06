@@ -15,7 +15,7 @@ public interface IUserClassRepo extends JpaRepository<UserClass, Integer> {
             "WHERE uc.class_id = ?1 AND u.role_id = 1", nativeQuery = true)
     List<UserClass> findAllStudentInClass(int classId);
 
-    @Query(value = "SELECT class_id FROM user_class WHERE user_id = ?1", nativeQuery = true)
+    @Query(value = "SELECT class_id FROM user_class WHERE user_id = ?1 LIMIT 1", nativeQuery = true)
     int findClassIdForStudent(int userId);
 
 }
