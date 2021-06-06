@@ -1,8 +1,12 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Model.User;
+import com.example.demo.Service.AttendanceServiceImpl;
 import com.example.demo.Service.ICourseService;
-import com.example.demo.Service.ILectureService;
+import com.example.demo.Service.LectureServiceImpl;
+import com.example.demo.Service.UserServiceImpl;
+import com.example.demo.Service.View.AttendanceOverviewImpl;
+import com.example.demo.Service.View.AttendanceViewServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,17 +22,28 @@ import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(OverviewController.class)
-class OverviewControllerTest
+@WebMvcTest(StudentStatisticController.class)
+class StudentStatisticControllerTest
 {
     @MockBean
-    private ICourseService courseService;
+    AttendanceServiceImpl attendanceService;
 
     @MockBean
-    private ILectureService lectureService;
+    UserServiceImpl userService;
+
+    @MockBean
+    ICourseService courseService;
+
+    @MockBean
+    LectureServiceImpl lectureService;
+
+    @MockBean
+    AttendanceViewServiceImpl attendanceViewService;
+
+    @MockBean
+    AttendanceOverviewImpl attendanceOverview;
 
     @Autowired
     private MockMvc mvc;
@@ -40,45 +55,35 @@ class OverviewControllerTest
     {
         User user = new User();
         user.setUserId(1);
-        user.setRole_id(1);
+        user.setRole_id(2);
         session = new HashMap<>();
         session.put("login", user);
+
+        when(userService.findById(1)).thenReturn(user);
     }
 
     @Test
-    void getOverviewPage() throws Exception
-    {
-        //no user
-        mvc.perform(MockMvcRequestBuilders.get("/overview"))
-                .andExpect(MockMvcResultMatchers.redirectedUrl("/"));
-
-        //Student
-        mvc.perform(MockMvcRequestBuilders.get("/overview").sessionAttrs(session))
-                .andExpect(MockMvcResultMatchers.view().name("Overview"));
-
-        ((User) session.get("login")).setRole_id(2);
-
-        //Teacher
-        mvc.perform(MockMvcRequestBuilders.get("/overview").sessionAttrs(session))
-                .andExpect(MockMvcResultMatchers.view().name("Overview"));
-
-        ((User) session.get("login")).setRole_id(3);
-
-        //admin
-        mvc.perform(MockMvcRequestBuilders.get("/overview").sessionAttrs(session))
-                .andExpect(MockMvcResultMatchers.view().name("admin"));
-
-    }
-
-    @Test
-    void courseOverview() throws Exception
+    void getStudentStatistics() throws Exception
     {
         //not logged in
-        mvc.perform((MockMvcRequestBuilders.get("/course/1?weeknumber=1&year=2020")))
+        mvc.perform(MockMvcRequestBuilders.get("/student/statistics"))
                 .andExpect(MockMvcResultMatchers.redirectedUrl("/"));
 
         //logged in
-        mvc.perform((MockMvcRequestBuilders.get("/course/1?weeknumber=1&year=2020"))
+        mvc.perform(MockMvcRequestBuilders.get("/student/statistics")
+                .sessionAttrs(session))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void getStudentStatisticsResult() throws Exception
+    {
+        //not logged in
+        mvc.perform(MockMvcRequestBuilders.get("/student/statistics/result?course=1"))
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/"));
+
+        //logged in
+        mvc.perform(MockMvcRequestBuilders.get("/student/statistics/result?course=1")
                 .sessionAttrs(session))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }

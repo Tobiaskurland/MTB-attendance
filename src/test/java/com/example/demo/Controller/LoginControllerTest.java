@@ -39,6 +39,18 @@ class LoginControllerTest
     }
 
     @Test
+    void getLoginPage() throws Exception
+    {
+        mvc.perform(MockMvcRequestBuilders.get("/")).andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void logout() throws Exception
+    {
+        mvc.perform(MockMvcRequestBuilders.get("/logout")).andExpect(MockMvcResultMatchers.redirectedUrl("/"));
+    }
+
+    @Test
     void login() throws Exception
     {
         mvc.perform(MockMvcRequestBuilders.post("/login?email=hacker&password=hackthemainframe"))

@@ -69,6 +69,7 @@ public class CodeController {
             }
 
             //Data we need on the HTML
+            model.addAttribute("user", u);
             model.addAttribute("role", u.getRole_id());
             model.addAttribute("user", u);
             model.addAttribute("l", l);
