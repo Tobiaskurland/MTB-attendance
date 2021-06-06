@@ -96,8 +96,8 @@ public class OverviewController
             System.out.println(user.getRole_id());
             if(user.getRole_id() != 3)
             {
-                int classId = userClassService.findClassIdForStudent(user.getUserId());
-                List<Course> courses = courseService.findCourseByClassId(classId);
+                //int classId = userClassService.findClassIdForStudent(user.getUserId());
+                List<Course> courses = courseService.findCourseByClassId(1);
                 List<Lecture> todaysLectures = lectureService.findLecturesByDate(LocalDate.now());
 
                 model.addAttribute("lectures", lecturesForDate(todaysLectures, LocalDate.now()));
