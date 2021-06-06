@@ -12,5 +12,6 @@ public interface IUserClassService {
 
     void save(UserClass userClass);
     List<UserClass> findAllStudentInClass(int classId);
+    int findClassIdForStudent(int userId);
 
 }

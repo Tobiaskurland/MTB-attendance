@@ -22,4 +22,9 @@ public class UserClassServiceImpl implements IUserClassService{
     public List<UserClass> findAllStudentInClass(int classId) {
         return userClassRepo.findAllStudentInClass(classId);
     }
+
+    @Override
+    public int findClassIdForStudent(int userId) {
+        return userClassRepo.findClassIdForStudent(userId);
+    }
 }

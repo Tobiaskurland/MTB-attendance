@@ -70,6 +70,7 @@ public class CodeController {
 
             //Data we need on the HTML
             model.addAttribute("role", u.getRole_id());
+            model.addAttribute("user", u);
             model.addAttribute("l", l);
             model.addAttribute("date", l.getDate());
             model.addAttribute("time_interval", l.getTimeInterval());
@@ -146,7 +147,7 @@ public class CodeController {
         if (session.getAttribute("login") != null) {
 
             //Set the CODE_EXPIRE to 5 minutes after NOW()
-            Timestamp timestamp = new Timestamp(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5));
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(1));
 
             //Get the random generated alphanumeric string
             String code = utility.randomAlphanumericString();

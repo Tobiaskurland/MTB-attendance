@@ -5,6 +5,7 @@ import com.example.demo.Model.Lecture;
 import com.example.demo.Model.User;
 import com.example.demo.Service.ICourseService;
 import com.example.demo.Service.ILectureService;
+import com.example.demo.Service.IUserClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,15 +20,23 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Controller
 public class OverviewController
 {
+
+    //Logger
+    Logger log = Logger.getLogger(OverviewController.class.getName());
+
     @Autowired
     private ILectureService lectureService;
 
     @Autowired
     private ICourseService courseService;
+
+    @Autowired
+    private IUserClassService userClassService;
 
     @GetMapping("/course/{courseID}")
     public String getCourseOverviewPage(@PathVariable int courseID, @RequestParam("weeknumber") int weekNumber, @RequestParam("year") int year, HttpSession session, Model model)
@@ -87,7 +96,8 @@ public class OverviewController
             System.out.println(user.getRole_id());
             if(user.getRole_id() != 3)
             {
-                List<Course> courses = courseService.findCourseByClassId(1);
+                int classId = userClassService.findClassIdForStudent(user.getUserId());
+                List<Course> courses = courseService.findCourseByClassId(classId);
                 List<Lecture> todaysLectures = lectureService.findLecturesByDate(LocalDate.now());
 
                 model.addAttribute("lectures", lecturesForDate(todaysLectures, LocalDate.now()));
